@@ -1,8 +1,7 @@
 import React from 'react';
-interface ISvg {
-    size?: string
-}
-const Search = ({ size = 'mini' }: ISvg): JSX.Element => {
+import { ISvg } from '../../types';
+
+const Search: React.FC<ISvg> = ({ size = 'mini' }) => {
   return (
     <svg
       viewBox="0 0 24 24"
