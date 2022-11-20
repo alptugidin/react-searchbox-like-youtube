@@ -1,1 +1,2 @@
-export { default } from './SearchBox';
+import { SearchBox } from './SearchBox';
+export default SearchBox;
