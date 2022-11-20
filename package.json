@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "dist": "npx tsup",
+    "dist": "npx tsup && npm run dist:css && npm run dist:copy",
     "dist:css": "postcss src/index.css -o dist/index.css",
     "dist:copy": "copy package.json dist"
   },
@@ -28,6 +28,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.11",
     "postcss": "^8.4.19",
+    "postcss-cli": "^10.0.0",
     "tailwindcss": "^3.2.4",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
