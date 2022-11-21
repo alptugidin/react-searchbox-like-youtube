@@ -54,6 +54,7 @@ const SearchBox: React.FC = () => {
   return (
     <div
       ref={mainRef}
+      id='sbly'
       className='relative w-full z-30'>
       <SearchBoxContext.Provider value={value}>
         <Input/>
