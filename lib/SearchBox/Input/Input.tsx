@@ -4,16 +4,19 @@ import { SearchBoxContext } from '../SearchBox';
 import { Back, Search } from '../Svg';
 const Input = (): JSX.Element => {
   const cx = useContext(SearchBoxContext);
-
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
-
+  const [value, setValue] = useState<string>();
   const handleSearch = (): void => {
     setFocusSB(cx);
   };
 
   const handleBack = (): void => {
     cx.setBlurSB();
+  };
+
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setValue(e.target.value);
   };
 
   const handleBoxFocus = (): void => {
@@ -63,6 +66,8 @@ const Input = (): JSX.Element => {
             {!cx.isMobile && (
               <div
                 ref={leftSvgRef}
+                id='leftSearchSVG'
+                role='leftSearchSVG'
                 className='w-12 absolute -left-7 -top-[1px] h-[40px] flex justify-center items-center bg-white border border-blue-800
            border-r-0 rounded-l-full md:hidden'>
                 <div className='h-[34px] bottom-0 w-1 bg-white absolute -right-0'></div>
@@ -72,18 +77,21 @@ const Input = (): JSX.Element => {
             <input
               ref={cx.inputRef}
               className='w-full md:h-[38px] h-[32px] md:bg-white outline-none pl-5 rounded-l-full'
-              placeholder='Search'
+              onChange={handleOnChange}
+              value={value}
+              placeholder='Search something'
               type="text" />
 
           </div>
           <button
             ref={cx.searchButtonRef}
             type='button'
+            role='SearchButton'
             onClick={handleSearch}
             className={'group w-16 md:h-10 h-[32px] flex justify-center items-center relative md:border md:border-l-0 md:border-gray-300 md:rounded-r-full md:bg-gray-200 md:hover:bg-gray-300 md:transition-all'}>
             <Search size='normal'/>
             { !cx.isMobile &&
-          <div className='absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden group-hover:block bg-opacity-80'>
+          <div role='searchModal' className='absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden group-hover:block bg-opacity-80'>
             <p>Search</p>
           </div>
             }
