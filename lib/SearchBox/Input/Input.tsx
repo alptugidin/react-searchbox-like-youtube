@@ -1,24 +1,27 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { setFocusSB } from '../../utils/setFocusSB';
-import { SearchBoxContext } from '../SearchBox';
+import { useSearchBoxContext } from '../SearchBox';
 import { Back, Search } from '../Svg';
 const Input = (): JSX.Element => {
-  const cx = useContext(SearchBoxContext);
+  const cx = useSearchBoxContext();
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const [value, setValue] = useState<string>();
   const handleSearch = (): void => {
     setFocusSB(cx);
+    if (cx.isMobile) {
+      boxRef.current?.classList.remove('hidden');
+    }
   };
 
   const handleBack = (): void => {
     cx.setBlurSB();
+    boxRef.current?.classList.add('hidden');
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setValue(e.target.value);
+    cx.setValue(e.target.value);
   };
 
   const handleBoxFocus = (): void => {
@@ -66,9 +69,9 @@ const Input = (): JSX.Element => {
         { (cx.isMobile && cx.showSB) &&
           <button
             type='button'
-            role='BackButton'
             onClick={handleBack}
             ref={cx.backButtonRef}
+            role='BackButton'
             className='basis-1/12 flex justify-center items-center'>
             <Back/>
           </button>
@@ -76,9 +79,7 @@ const Input = (): JSX.Element => {
         <div ref={cx.middleDivRef} className='flex'>
           <div
             ref={boxRef}
-            onFocus={handleBoxFocus}
-            onBlur={handleBoxBlur}
-            className={'w-full rounded-l-full md:border md:border-gray-300 relative ' + (cx.showSB ? 'block' : 'hidden')}>
+            className={'w-full rounded-l-full md:border md:border-gray-300 relative md:block hidden'}>
             {!cx.isMobile && (
               <div
                 ref={leftSvgRef}
@@ -94,7 +95,9 @@ const Input = (): JSX.Element => {
               ref={cx.inputRef}
               className='w-full md:h-[38px] h-[32px] md:bg-white outline-none pl-5 rounded-l-full'
               onChange={handleOnChange}
-              value={value}
+              onFocus={handleBoxFocus}
+              onBlur={handleBoxBlur}
+              value={cx.value}
               placeholder='Search something'
               type="text" />
 
@@ -123,7 +126,7 @@ const Input = (): JSX.Element => {
         }
       </div>
       { (cx.isMobile && cx.showSB) &&
-        <div className='absolute left-0 right-0 bg-black bg-opacity-30 h-screen'></div>
+        <div role='mobileBackground' className='absolute left-0 right-0 bg-black bg-opacity-30 h-screen'></div>
       }
     </>
   );
