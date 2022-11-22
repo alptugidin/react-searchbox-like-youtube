@@ -1,13 +1,12 @@
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Input } from './Input';
 import { Results } from './Results';
-import { ISearchBoxContext } from '../types';
+import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
 
-export const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
-const SearchBox: React.FC = () => {
-  const { isMobile } = useIsMobile();
-  const [showSB, setShowSB] = useState(false);
+const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
+
+const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
   const mainRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
@@ -15,6 +14,11 @@ const SearchBox: React.FC = () => {
   const rightDivRef = useRef<HTMLDivElement>(null);
   const middleDivRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const { isMobile } = useIsMobile();
+  const [showSB, setShowSB] = useState(false);
+  const [value, setValue] = useState<string>('');
+  const [filteredResults, setFilteredResults] = useState<ISearchResult[]>([]);
 
   const setBlurSB = (): void => {
     setShowSB(false);
@@ -27,7 +31,9 @@ const SearchBox: React.FC = () => {
     middleDivRef.current?.classList.remove('basis-9/12');
   };
 
-  const value = {
+  const foo = 'bar';
+
+  const cxValue = {
     isMobile,
     mainRef,
     topRef,
@@ -38,7 +44,13 @@ const SearchBox: React.FC = () => {
     inputRef,
     showSB,
     setShowSB,
-    setBlurSB
+    setBlurSB,
+    results,
+    onChange,
+    filteredResults,
+    setFilteredResults,
+    value,
+    setValue
   };
 
   useEffect(() => {
@@ -56,7 +68,7 @@ const SearchBox: React.FC = () => {
       ref={mainRef}
       id='sbly'
       className='relative w-full z-30'>
-      <SearchBoxContext.Provider value={value}>
+      <SearchBoxContext.Provider value={cxValue}>
         <Input/>
         <Results/>
       </SearchBoxContext.Provider>
@@ -64,4 +76,8 @@ const SearchBox: React.FC = () => {
   );
 };
 
+export const useSearchBoxContext = (): ISearchBoxContext => {
+  const cx = useContext(SearchBoxContext);
+  return cx;
+};
 export default SearchBox;
