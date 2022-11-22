@@ -6,6 +6,8 @@ const Input = (): JSX.Element => {
   const cx = useContext(SearchBoxContext);
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const [value, setValue] = useState<string>();
   const handleSearch = (): void => {
     setFocusSB(cx);
@@ -21,8 +23,8 @@ const Input = (): JSX.Element => {
 
   const handleBoxFocus = (): void => {
     leftSvgRef.current?.classList.remove('md:hidden');
-    boxRef.current?.classList.add('rounded-l-none', '!border-blue-800');
     if (!cx.isMobile) {
+      boxRef.current?.classList.add('rounded-l-none', '!border-blue-800');
       cx.inputRef.current?.classList.add('shadow-inner');
       leftSvgRef.current?.classList.add('shadow-inner');
     }
@@ -30,10 +32,23 @@ const Input = (): JSX.Element => {
 
   const handleBoxBlur = (): void => {
     leftSvgRef.current?.classList.add('md:hidden');
-    boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
     if (!cx.isMobile) {
+      boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
       cx.inputRef.current?.classList.remove('shadow-inner');
       leftSvgRef.current?.classList.remove('shadow-inner');
+    }
+  };
+
+  const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    if (!cx.isMobile) {
+      switch (e.type) {
+      case 'mouseenter':
+        modalRef.current?.classList.remove('hidden');
+        break;
+      case 'mouseleave':
+        modalRef.current?.classList.add('hidden');
+        break;
+      }
     }
   };
 
@@ -48,12 +63,13 @@ const Input = (): JSX.Element => {
   return (
     <>
       <div ref={cx.topRef} className='relative md:block flex justify-end md:py-0 py-2'>
-        { cx.isMobile &&
+        { (cx.isMobile && cx.showSB) &&
           <button
             type='button'
+            role='BackButton'
             onClick={handleBack}
             ref={cx.backButtonRef}
-            className='hidden basis-1/12  justify-center items-center'>
+            className='basis-1/12 flex justify-center items-center'>
             <Back/>
           </button>
         }
@@ -85,14 +101,19 @@ const Input = (): JSX.Element => {
           </div>
           <button
             ref={cx.searchButtonRef}
+            onMouseEnter={e => handleButtonHover(e)}
+            onMouseLeave={e => handleButtonHover(e) }
             type='button'
             role='SearchButton'
             onClick={handleSearch}
-            className={'group w-16 md:h-10 h-[32px] flex justify-center items-center relative md:border md:border-l-0 md:border-gray-300 md:rounded-r-full md:bg-gray-200 md:hover:bg-gray-300 md:transition-all'}>
+            className={'w-16 md:h-10 h-[32px] flex justify-center items-center relative md:border md:border-l-0 md:border-gray-300 md:rounded-r-full md:bg-gray-200 md:hover:bg-gray-300 md:transition-all'}>
             <Search size='normal'/>
             { !cx.isMobile &&
-          <div role='searchModal' className='absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden group-hover:block bg-opacity-80'>
-            <p>Search</p>
+          <div
+            ref={modalRef}
+            role='searchModal'
+            className='absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden bg-opacity-80'>
+            <p>Search!</p>
           </div>
             }
           </button>
