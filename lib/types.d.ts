@@ -1,5 +1,19 @@
 import React from 'react';
-export interface ISearchBoxContext {
+
+export interface ISvg {
+    size?: string
+}
+
+export interface ISearchResult {
+    id: number
+    title: string
+}
+export interface ISearchBoxProps {
+    results: ISearchResult[]
+    onChange: (onChangeData?: string) => void
+}
+
+export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange'> {
     isMobile: boolean
     mainRef: React.RefObject<HTMLDivElement>
     topRef: React.RefObject<HTMLDivElement>
@@ -11,8 +25,8 @@ export interface ISearchBoxContext {
     setShowSB: React.Dispatch<React.SetStateAction<boolean>>
     showSB: boolean
     setBlurSB: () => void
-}
-
-export interface ISvg {
-    size?: string
+    filteredResults: ISearchResult[]
+    setFilteredResults: React.Dispatch<React.SetStateAction<ISearchResult[]>>
+    value: string
+    setValue: React.Dispatch<React.SetStateAction<string>>
 }
