@@ -1,7 +1,7 @@
 import React from 'react';
 import mediaQuery from 'css-mediaquery';
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { getByRole, queryByRole, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchBox from '../lib';
 
@@ -31,11 +31,23 @@ it('should render the hidden `Saerch` modal when hovering on Search Button ', as
   expect(searchModal).not.toHaveClass('hidden');
 });
 
-it('should render properly with responsive classes when clicked search button', async () => {
+it('should render the input and back button, when clicked search button in responsive mode', async () => {
   window.innerWidth = 700;
-  render(<SearchBox/>);
-  const searchBox = document.getElementById('sbly') as HTMLDivElement;
+  const { container } = render(<SearchBox/>);
   const searchButton = screen.getByRole('SearchButton');
-  // const backButton = screen.getByRole('BackButton');
   const input = screen.getByPlaceholderText('Search something');
+  expect(input.parentElement).toHaveClass('hidden');
+  expect(queryByRole(container, 'BackButton')).toEqual(null);
+  await userEvent.click(searchButton);
+  expect(input.parentElement).not.toHaveClass('hidden');
+  expect(queryByRole(container, 'BackButton')).not.toEqual(null);
+});
+
+it('should applied the background, when clicked search button in responsive mode', async () => {
+  window.innerWidth = 700;
+  const { container } = render(<SearchBox/>);
+  const searchButton = screen.getByRole('SearchButton');
+  expect(queryByRole(container, 'mobileBackground')).toEqual(null);
+  await userEvent.click(searchButton);
+  expect(queryByRole(container, 'mobileBackground')).toBeVisible();
 });
