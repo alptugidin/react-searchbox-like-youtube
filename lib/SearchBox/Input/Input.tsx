@@ -37,13 +37,13 @@ const Input = (): JSX.Element => {
   };
 
   const handleBoxBlur = (): void => {
-    leftSvgRef.current?.classList.add('md:hidden');
-    cx.setValue('');
-    if (!cx.isMobile) {
-      boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
-      cx.inputRef.current?.classList.remove('shadow-inner');
-      leftSvgRef.current?.classList.remove('shadow-inner');
-    }
+    // leftSvgRef.current?.classList.add('md:hidden');
+    // cx.setValue('');
+    // if (!cx.isMobile) {
+    //   boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
+    //   cx.inputRef.current?.classList.remove('shadow-inner');
+    //   leftSvgRef.current?.classList.remove('shadow-inner');
+    // }
   };
 
   const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {

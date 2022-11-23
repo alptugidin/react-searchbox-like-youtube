@@ -28,23 +28,33 @@ const Results = (): JSX.Element => {
     return span;
   };
 
+  const handleClick = (onClickData: ISearchResult): void => {
+    console.log('onClickData');
+  };
+
   useEffect(() => {
     setResultsLen(cx.results.filter((item) => filteringCondition(item.title)).length);
   }, [cx.value]);
 
   return (
-    <div className='w-[calc(100%_-_33px)] bg-white custom-box-shadow rounded-xl absolute top-11 -left-[26px] overflow-hidden'>
+    <div
+      ref={cx.resultRef}
+      className='w-[calc(100%_-_33px)] bg-white custom-box-shadow rounded-xl absolute top-11 -left-[26px] overflow-hidden'>
       {cx.value !== '' && resultsLen > 0 && (
         <ul role='listResults' className='py-3'>
           {
             cx.results.filter(item => filteringCondition(item.title)).map(item => (
               <li key={item.id} className=''>
-                <div className='flex cursor-default hover:bg-gray-100 h-8 leading-8'>
+                <button
+                  type='button'
+                  role='selectli'
+                  onClick={() => handleClick(item)}
+                  className='w-full flex items-center cursor-default hover:bg-gray-100 h-8 leading-8'>
                   <div className='w-12 flex justify-center items-center'>
                     <Search size='mini' />
                   </div>
                   {highlightedResult(item.title)}
-                </div>
+                </button>
               </li>
             ))
           }
