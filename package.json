@@ -29,6 +29,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@vitejs/plugin-react": "^2.2.0",
+    "@vitest/coverage-c8": "^0.25.3",
     "autoprefixer": "^10.4.13",
     "css-mediaquery": "^0.1.2",
     "eslint": "^8.27.0",
