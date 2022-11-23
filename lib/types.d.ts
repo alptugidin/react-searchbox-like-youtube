@@ -29,4 +29,6 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     setFilteredResults: React.Dispatch<React.SetStateAction<ISearchResult[]>>
     value: string
     setValue: React.Dispatch<React.SetStateAction<string>>
+    tempVal: string
+    setTempVal: React.Dispatch<React.SetStateAction<string>>
 }
