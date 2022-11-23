@@ -17,18 +17,21 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
 
   const { isMobile } = useIsMobile();
   const [showSB, setShowSB] = useState(false);
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState('');
+  const [tempVal, setTempVal] = useState('');
   const [filteredResults, setFilteredResults] = useState<ISearchResult[]>([]);
 
   const setBlurSB = (): void => {
-    setShowSB(false);
-    mainRef.current?.classList.remove('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
-    topRef.current?.classList.remove('custom-box-shadow', 'justify-evenly');
-    searchButtonRef.current?.classList.remove('bg-gray-100', 'rounded-r-full');
-    backButtonRef.current?.classList.add('hidden');
-    backButtonRef.current?.classList.remove('flex');
-    rightDivRef.current?.classList.add('hidden');
-    middleDivRef.current?.classList.remove('basis-9/12');
+    if (isMobile) {
+      setShowSB(false);
+      mainRef.current?.classList.remove('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
+      topRef.current?.classList.remove('custom-box-shadow', 'justify-evenly');
+      searchButtonRef.current?.classList.remove('bg-gray-100', 'rounded-r-full');
+      backButtonRef.current?.classList.add('hidden');
+      backButtonRef.current?.classList.remove('flex');
+      rightDivRef.current?.classList.add('hidden');
+      middleDivRef.current?.classList.remove('basis-9/12');
+    }
   };
 
   const foo = 'bar';
@@ -50,18 +53,20 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     filteredResults,
     setFilteredResults,
     value,
-    setValue
+    setValue,
+    tempVal,
+    setTempVal
   };
 
   useEffect(() => {
     const listener = (e: MouseEvent): void => {
-      if (mainRef.current != null && !mainRef.current?.contains(e.target as Node) && isMobile) {
+      if (!mainRef.current?.contains(e.target as Node)) {
         setBlurSB();
       }
     };
     window.addEventListener('click', listener);
     return () => window.removeEventListener('click', listener);
-  }, [isMobile]);
+  }, []);
 
   return (
     <div
