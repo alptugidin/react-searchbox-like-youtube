@@ -22,6 +22,7 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     searchButtonRef: React.RefObject<HMLTButtonElement>
     backButtonRef: React.RefObject<HMLTButtonElement>
     inputRef: React.RefObject<HTMLInputElement>
+    resultRef: React.RefObject<HTMLDivElement>
     setShowSB: React.Dispatch<React.SetStateAction<boolean>>
     showSB: boolean
     setBlurSB: () => void
