@@ -3,7 +3,6 @@ import jest from 'jest-mock';
 import { queryByRole, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchBox from '../lib';
-
 const mockOnChange = jest.fn();
 it('shoud render on the page', () => {
   render(<SearchBox results={[]} onChange={mockOnChange} />);
