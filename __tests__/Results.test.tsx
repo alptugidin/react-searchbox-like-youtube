@@ -1,7 +1,7 @@
 import React from 'react';
 import jest from 'jest-mock';
 import '@testing-library/jest-dom';
-import { findByRole, fireEvent, queryByRole, render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchBox from '../lib';
 import { ISearchResult } from '../lib/types';
