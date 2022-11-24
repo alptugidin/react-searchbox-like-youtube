@@ -23,6 +23,9 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     backButtonRef: React.RefObject<HMLTButtonElement>
     inputRef: React.RefObject<HTMLInputElement>
     resultRef: React.RefObject<HTMLDivElement>
+    boxRef: React.RefObject<HTMLDivElement>
+    leftSvgRef: React.RefObject<HTMLDivElement>
+    modalRef: React.RefObject<HTMLDivElement>
     setShowSB: React.Dispatch<React.SetStateAction<boolean>>
     showSB: boolean
     setBlurSB: () => void
@@ -33,3 +36,7 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     tempVal: string
     setTempVal: React.Dispatch<React.SetStateAction<string>>
 }
+
+export interface ISearchBoxProvider {
+    children: React.ReactNode
+  }
