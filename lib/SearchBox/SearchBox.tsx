@@ -14,6 +14,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
   const rightDivRef = useRef<HTMLDivElement>(null);
   const middleDivRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const { isMobile } = useIsMobile();
   const [showSB, setShowSB] = useState(false);
@@ -31,6 +32,8 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
       backButtonRef.current?.classList.remove('flex');
       rightDivRef.current?.classList.add('hidden');
       middleDivRef.current?.classList.remove('basis-9/12');
+    } else {
+      // blursb for !responsive
     }
   };
 
@@ -45,6 +48,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     searchButtonRef,
     backButtonRef,
     inputRef,
+    resultRef,
     showSB,
     setShowSB,
     setBlurSB,
