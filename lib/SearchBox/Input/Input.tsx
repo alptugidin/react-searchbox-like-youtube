@@ -34,7 +34,6 @@ const Input = (): JSX.Element => {
   };
 
   const handleBoxBlur = (): void => {
-
   };
 
   const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
