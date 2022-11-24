@@ -4,21 +4,18 @@ import { useSearchBoxContext } from '../SearchBox';
 import { Back, Search } from '../Svg';
 const Input = (): JSX.Element => {
   const cx = useSearchBoxContext();
-  const boxRef = useRef<HTMLDivElement>(null);
-  const leftSvgRef = useRef<HTMLDivElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
 
   const handleSearch = (): void => {
     setFocusSB(cx);
     if (cx.isMobile) {
-      boxRef.current?.classList.remove('hidden');
+      cx.boxRef.current?.classList.remove('hidden');
     }
   };
 
   const handleBack = (): void => {
     cx.setBlurSB();
     cx.setTempVal('');
-    boxRef.current?.classList.add('hidden');
+    cx.boxRef.current?.classList.add('hidden');
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -28,32 +25,26 @@ const Input = (): JSX.Element => {
   };
 
   const handleBoxFocus = (): void => {
-    leftSvgRef.current?.classList.remove('md:hidden');
+    cx.leftSvgRef.current?.classList.remove('md:hidden');
     if (!cx.isMobile) {
-      boxRef.current?.classList.add('rounded-l-none', '!border-blue-800');
+      cx.boxRef.current?.classList.add('rounded-l-none', '!border-blue-800');
       cx.inputRef.current?.classList.add('shadow-inner');
-      leftSvgRef.current?.classList.add('shadow-inner');
+      cx.leftSvgRef.current?.classList.add('shadow-inner');
     }
   };
 
   const handleBoxBlur = (): void => {
-    leftSvgRef.current?.classList.add('md:hidden');
-    cx.setValue('');
-    if (!cx.isMobile) {
-      boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
-      cx.inputRef.current?.classList.remove('shadow-inner');
-      leftSvgRef.current?.classList.remove('shadow-inner');
-    }
+
   };
 
   const handleButtonHover = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
     if (!cx.isMobile) {
       switch (e.type) {
       case 'mouseenter':
-        modalRef.current?.classList.remove('hidden');
+        cx.modalRef.current?.classList.remove('hidden');
         break;
       case 'mouseleave':
-        modalRef.current?.classList.add('hidden');
+        cx.modalRef.current?.classList.add('hidden');
         break;
       }
     }
@@ -82,11 +73,11 @@ const Input = (): JSX.Element => {
         }
         <div ref={cx.middleDivRef} className='flex'>
           <div
-            ref={boxRef}
+            ref={cx.boxRef}
             className={'w-full rounded-l-full md:border md:border-gray-300 relative md:block hidden'}>
             {!cx.isMobile && (
               <div
-                ref={leftSvgRef}
+                ref={cx.leftSvgRef}
                 id='leftSearchSVG'
                 role='leftSearchSVG'
                 className='w-12 absolute -left-7 -top-[1px] h-[40px] flex justify-center items-center bg-white border border-blue-800 border-r-0 rounded-l-full md:hidden'>
@@ -116,7 +107,7 @@ const Input = (): JSX.Element => {
             <Search size='normal' />
             {!cx.isMobile &&
               <div
-                ref={modalRef}
+                ref={cx.modalRef}
                 role='searchModal'
                 className='absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden bg-opacity-80'>
                 <p>Search!</p>
