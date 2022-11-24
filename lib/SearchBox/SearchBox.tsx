@@ -15,12 +15,9 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
   const middleDivRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
-<<<<<<< HEAD
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-=======
->>>>>>> 17bdbade2fe797901e4aa65e1da124b79a7de4b4
 
   const { isMobile } = useIsMobile();
   const [showSB, setShowSB] = useState(false);
@@ -39,7 +36,6 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
       rightDivRef.current?.classList.add('hidden');
       middleDivRef.current?.classList.remove('basis-9/12');
     } else {
-<<<<<<< HEAD
       leftSvgRef.current?.classList.add('md:hidden');
       setValue('');
       if (!isMobile) {
@@ -47,9 +43,6 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
         inputRef.current?.classList.remove('shadow-inner');
         leftSvgRef.current?.classList.remove('shadow-inner');
       }
-=======
-      // blursb for !responsive
->>>>>>> 17bdbade2fe797901e4aa65e1da124b79a7de4b4
     }
   };
 
@@ -63,12 +56,9 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     backButtonRef,
     inputRef,
     resultRef,
-<<<<<<< HEAD
     boxRef,
     leftSvgRef,
     modalRef,
-=======
->>>>>>> 17bdbade2fe797901e4aa65e1da124b79a7de4b4
     showSB,
     setShowSB,
     setBlurSB,
