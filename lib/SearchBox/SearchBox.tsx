@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useContext, useEffect, useReducer, useRef, useState } from 'react';
 import { Input } from './Input';
 import { Results } from './Results';
 import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
@@ -15,6 +15,9 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
   const middleDivRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const leftSvgRef = useRef<HTMLDivElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const { isMobile } = useIsMobile();
   const [showSB, setShowSB] = useState(false);
@@ -33,11 +36,15 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
       rightDivRef.current?.classList.add('hidden');
       middleDivRef.current?.classList.remove('basis-9/12');
     } else {
-      // blursb for !responsive
+      leftSvgRef.current?.classList.add('md:hidden');
+      setValue('');
+      if (!isMobile) {
+        boxRef.current?.classList.remove('rounded-l-none', '!border-blue-800');
+        inputRef.current?.classList.remove('shadow-inner');
+        leftSvgRef.current?.classList.remove('shadow-inner');
+      }
     }
   };
-
-  const foo = 'bar';
 
   const cxValue = {
     isMobile,
@@ -49,6 +56,9 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     backButtonRef,
     inputRef,
     resultRef,
+    boxRef,
+    leftSvgRef,
+    modalRef,
     showSB,
     setShowSB,
     setBlurSB,
@@ -84,7 +94,6 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     </div>
   );
 };
-
 export const useSearchBoxContext = (): ISearchBoxContext => {
   const cx = useContext(SearchBoxContext);
   return cx;
