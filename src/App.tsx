@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import SearchBox from '../lib';
+import { ISearchResult } from '../lib/types';
 const App: React.FC = () => {
   const [results] = useState(
     [
@@ -16,6 +17,10 @@ const App: React.FC = () => {
   const handleOnChange = (): void => {
   };
 
+  const handleOnClick = (): void => {
+
+  };
+
   return (
     <div className='h-14 w-full bg-white flex justify-evenly items-center'>
       <div className='w-3/12 flex justify-center'>
@@ -23,8 +28,9 @@ const App: React.FC = () => {
       </div>
       <div className='md:w-[500px] w-6/12'>
         <SearchBox
-          results={results}
           onChange={handleOnChange}
+          onClick={handleOnClick}
+          results={results}
         />
       </div>
       <div className='w-2/12 flex justify-end'>
