@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { setFocusSB } from '../../utils/setFocusSB';
 import { useSearchBoxContext } from '../SearchBox';
-import { Back, Search } from '../Svg';
+import { Back, ClearSVG, Search } from '../Svg';
 const Input = (): JSX.Element => {
   const cx = useSearchBoxContext();
 
@@ -16,6 +16,13 @@ const Input = (): JSX.Element => {
     cx.setBlurSB();
     cx.setTempVal('');
     cx.boxRef.current?.classList.add('hidden');
+  };
+
+  const handleClear = (): void => {
+    cx.setValue('');
+    cx.setTempVal('');
+    cx.inputRef.current?.focus();
+    setTimeout(() => handleBoxFocus(), 1);
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -93,7 +100,15 @@ const Input = (): JSX.Element => {
               value={cx.tempVal}
               placeholder='Search something'
               type="text" />
-
+            { cx.tempVal.length > 0 &&
+              <button
+                type='button'
+                onClick={handleClear}
+                className='w-8 h-8 absolute top-[3px] right-1 rounded-full hover:bg-black hover:bg-opacity-10 p-1'
+              >
+                <ClearSVG />
+              </button>
+            }
           </div>
           <button
             ref={cx.searchButtonRef}
@@ -102,7 +117,7 @@ const Input = (): JSX.Element => {
             type='button'
             role='SearchButton'
             onClick={handleSearch}
-            className={'w-16 md:h-10 h-[32px] flex justify-center items-center relative md:border md:border-l-0 md:border-gray-300 md:rounded-r-full md:bg-gray-200 md:hover:bg-gray-300 md:transition-all'}>
+            className={'w-16 md:h-10 h-[32px] flex justify-center items-center relative md:border md:border-l-0 md:border-gray-300 md:rounded-r-full md:bg-gray-100 md:hover:bg-gray-200 md:transition-all'}>
             <Search size='normal' />
             {!cx.isMobile &&
               <div
@@ -115,7 +130,9 @@ const Input = (): JSX.Element => {
           </button>
         </div>
         {cx.isMobile &&
-          <div ref={cx.rightDivRef} className='hidden basis-1/12' ></div>
+          cx.value.length < 1 &&
+          <div ref={cx.rightDivRef} className='basis-1/12'>
+          </div>
         }
       </div>
       {(cx.isMobile && cx.showSB) &&
