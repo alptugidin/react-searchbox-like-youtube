@@ -28,6 +28,11 @@ const Results = (): JSX.Element => {
     return span;
   };
 
+  const handleOnClick = (item: ISearchResult): void => {
+    cx.setTempVal(item.title);
+    cx.setValue('');
+  };
+
   useEffect(() => {
     setResultsLen(cx.results.filter((item) => filteringCondition(item.title)).length);
   }, [cx.value]);
@@ -39,12 +44,15 @@ const Results = (): JSX.Element => {
           {
             cx.results.filter(item => filteringCondition(item.title)).map(item => (
               <li key={item.id} className=''>
-                <div className='flex cursor-default hover:bg-gray-100 h-8 leading-8'>
+                <button
+                  type='button'
+                  onClick={() => handleOnClick(item)}
+                  className='flex items-center cursor-default hover:bg-gray-100 h-8 leading-8 w-full'>
                   <div className='w-12 flex justify-center items-center'>
                     <Search size='mini' />
                   </div>
                   {highlightedResult(item.title)}
-                </div>
+                </button>
               </li>
             ))
           }
