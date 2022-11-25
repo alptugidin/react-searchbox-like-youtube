@@ -1,3 +1,4 @@
 import Search from './Search';
 import Back from './Back';
-export { Search, Back };
+import ClearSVG from './Clear';
+export { Search, Back, ClearSVG };
