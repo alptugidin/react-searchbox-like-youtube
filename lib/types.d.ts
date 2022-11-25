@@ -11,9 +11,10 @@ export interface ISearchResult {
 export interface ISearchBoxProps {
     results: ISearchResult[]
     onChange: (onChangeData?: string) => void
+    onClick: (onClickData?: ISearchResult) => void
 }
 
-export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange'> {
+export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange' | 'onClick'> {
     isMobile: boolean
     mainRef: React.RefObject<HTMLDivElement>
     topRef: React.RefObject<HTMLDivElement>
