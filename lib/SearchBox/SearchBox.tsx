@@ -6,7 +6,7 @@ import useIsMobile from '../hooks/useIsMobile';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 
-const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
+const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) => {
   const mainRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
@@ -64,6 +64,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, results }) => {
     setBlurSB,
     results,
     onChange,
+    onClick,
     filteredResults,
     setFilteredResults,
     value,
