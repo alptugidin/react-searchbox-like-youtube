@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
   return (
     <div className='h-14 w-full bg-white flex justify-evenly items-center'>
-      <div className='w-3/12 flex justify-center'>
+      <div className='md:w-3/12 w-2/12  flex justify-center'>
         <div className='w-full h-10 rounded-full bg-gray-200'></div>
       </div>
       <div className='md:w-[500px] w-6/12'>
