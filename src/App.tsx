@@ -10,7 +10,10 @@ const App: React.FC = () => {
       { id: 4, title: 'Swift tutorials' },
       { id: 5, title: 'Dart tutorials' },
       { id: 6, title: 'Python tutorials' },
-      { id: 7, title: 'Rust tutorials' }
+      { id: 7, title: 'Rust tutorials' },
+      { id: 8, title: 'C# tutorials' },
+      { id: 9, title: 'Perl tutorials' },
+      { id: 10, title: 'C++ tutorials' }
     ]
   );
 
