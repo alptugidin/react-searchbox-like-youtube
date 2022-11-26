@@ -5,19 +5,19 @@ import { Search } from '../Svg';
 import Arrow from '../Svg/Arrow';
 
 const Results = (): JSX.Element => {
-  const cx = useSearchBoxContext();
+  const ctx = useSearchBoxContext();
   const [resultsLen, setResultsLen] = useState(0);
 
   const filteringCondition = (title: string): string | undefined => {
-    if (cx.value === '') return undefined;
-    if (cx.value.length > 1 && title.toLowerCase().includes(cx.value.toLowerCase())) {
+    if (ctx.value === '') return undefined;
+    if (ctx.value.length > 1 && title.toLowerCase().includes(ctx.value.toLowerCase())) {
       return title;
     }
   };
 
   const highlightedResult = (title: string): JSX.Element => {
     let span = <span className=''>{title}</span>;
-    const splitted = title.split(new RegExp(`(${cx.value})`, 'gi'));
+    const splitted = title.split(new RegExp(`(${ctx.value})`, 'gi'));
     if (splitted.length > 1) {
       span =
         <div className='text-sm md:text-base'>
@@ -30,33 +30,33 @@ const Results = (): JSX.Element => {
   };
 
   const handleOnClick = (item: ISearchResult): void => {
-    cx.setTempVal(item.title);
-    cx.setValue('');
+    ctx.setTempVal(item.title);
+    ctx.setValue('');
   };
 
   const handleSelect = (title: string): void => {
-    cx.setValue(title);
-    cx.setTempVal(title);
-    cx.inputRef.current?.focus();
+    ctx.setValue(title);
+    ctx.setTempVal(title);
+    ctx.inputRef.current?.focus();
   };
 
   useEffect(() => {
-    setResultsLen(cx.results.filter((item) => filteringCondition(item.title)).length);
-  }, [cx.value]);
+    setResultsLen(ctx.results.filter((item) => filteringCondition(item.title)).length);
+  }, [ctx.value]);
 
   return (
     <div className='md:w-[calc(100%_-_33px)] w-full bg-white custom-box-shadow md:rounded-xl rounded-none absolute md:top-11 top-[48px] md:-left-[26px] left-0 md:overflow-hidden overflow-visible'>
-      {cx.value !== '' && resultsLen > 0 && (
+      {ctx.value !== '' && resultsLen > 0 && (
         <ul role='listResults' className='md:py-3'>
           <div className='bg-white absolute left-0 -top-1 right-0 h-1.5'></div>
           {
-            cx.results.filter(item => filteringCondition(item.title)).map(item => (
+            ctx.results.filter(item => filteringCondition(item.title)).map(item => (
               <li key={item.id} className='flex h-[38px] items-center border-b-[1px] md:border-none border-gray-100 md:py-0 md:px-0 pl-2'>
                 <button
                   type='button'
                   onClick={() => handleOnClick(item)}
                   className='flex items-center cursor-default md:hover:bg-gray-100 h-8 leading-8 w-full'>
-                  { !cx.isMobile &&
+                  { !ctx.isMobile &&
                     <div className='w-12 flex justify-center items-center'>
                       <Search size='mini' />
                     </div>
