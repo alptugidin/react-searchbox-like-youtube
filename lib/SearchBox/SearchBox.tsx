@@ -47,7 +47,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     }
   };
 
-  const cxValue = {
+  const ctxValue = {
     isMobile,
     mainRef,
     topRef,
@@ -89,7 +89,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
       ref={mainRef}
       id='sbly'
       className='relative z-30'>
-      <SearchBoxContext.Provider value={cxValue}>
+      <SearchBoxContext.Provider value={ctxValue}>
         <Input/>
         <Results/>
       </SearchBoxContext.Provider>
