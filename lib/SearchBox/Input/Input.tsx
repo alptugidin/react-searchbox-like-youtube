@@ -22,7 +22,6 @@ const Input = (): JSX.Element => {
     cx.setValue('');
     cx.setTempVal('');
     cx.inputRef.current?.focus();
-    setTimeout(() => handleBoxFocus(), 1);
   };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -77,7 +76,9 @@ const Input = (): JSX.Element => {
             <Back />
           </button>
         }
-        <div ref={cx.middleDivRef} className='flex'>
+        <div ref={cx.middleDivRef} className={`flex ${(cx.value.length > 0 && cx.isMobile)
+          ? 'basis-11/12 mr-2'
+          : 'basis-10/12 justify-end'}`}>
           <div
             ref={cx.boxRef}
             className={'w-full rounded-l-full md:border md:border-gray-300 relative md:block hidden'}>
@@ -93,22 +94,21 @@ const Input = (): JSX.Element => {
             )}
             <input
               ref={cx.inputRef}
-              className='w-full md:h-[38px] h-[32px] md:bg-white outline-none pl-5 rounded-l-full'
+              className='w-full md:h-[38px] h-[32px] md:bg-white  outline-none pl-5 rounded-l-full pr-8 md:pb-1 pb-0.5'
               onChange={handleOnChange}
               onFocus={handleBoxFocus}
               onBlur={handleBoxBlur}
               value={cx.tempVal}
               placeholder='Search something'
               type="text" />
-            { cx.tempVal.length > 0 &&
-              <button
-                type='button'
-                onClick={handleClear}
-                className='w-8 h-8 absolute top-[3px] right-1 rounded-full hover:bg-black hover:bg-opacity-10 p-1'
-              >
-                <ClearSVG />
-              </button>
-            }
+            <button
+              type='button'
+              onClick={handleClear}
+              className={`w-8 h-8 absolute md:top-[3px] top-0 md:right-1 right-0 rounded-full hover:bg-black hover:bg-opacity-10 p-1 cursor-pointer 
+              ${cx.tempVal.length > 0 ? 'block' : 'hidden'}`}
+            >
+              <ClearSVG />
+            </button>
           </div>
           <button
             ref={cx.searchButtonRef}
@@ -129,14 +129,12 @@ const Input = (): JSX.Element => {
             }
           </button>
         </div>
-        {cx.isMobile &&
-          cx.value.length < 1 &&
-          <div ref={cx.rightDivRef} className='basis-1/12'>
-          </div>
-        }
       </div>
       {(cx.isMobile && cx.showSB) &&
-        <div role='mobileBackground' className='absolute left-0 right-0 bg-black bg-opacity-30 h-screen'></div>
+        <div
+          role='mobileBackground'
+          onClick={() => cx.setBlurSB()}
+          className='absolute left-0 right-0 bg-black bg-opacity-30 h-screen'></div>
       }
     </>
   );
