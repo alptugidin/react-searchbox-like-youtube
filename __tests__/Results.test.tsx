@@ -19,9 +19,15 @@ const results = [
 const searchTerms = ['javascript', 'kotlin', 'rust', 'avascr', 'otl'];
 const randomTerm = searchTerms[Math.floor(Math.random() * searchTerms.length)];
 
-beforeEach(() => render(<SearchBox results={results} onChange={mockOnChange} />));
+beforeEach(() => render(
+  <SearchBox
+    results={results}
+    onChange={mockFn}
+    onClick={mockFn}
+  />)
+);
 
-const mockOnChange = jest.fn();
+const mockFn = jest.fn();
 it('should matched that the search term and the results', async () => {
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, randomTerm);
