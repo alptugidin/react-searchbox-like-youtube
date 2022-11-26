@@ -5,7 +5,8 @@ export const setFocusSB = (cx: ISearchBoxContext): void => {
     const setClasses = new Promise((resolve, reject) => {
       cx.setShowSB(true);
       cx.mainRef.current?.classList.add('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
-      cx.topRef.current?.classList.add('custom-box-shadow', 'justify-evenly');
+      cx.topRef.current?.classList.add('custom-box-shadow');
+      cx.topRef.current?.classList.remove('justify-end');
       cx.inputRef.current?.classList.add('bg-gray-100');
       cx.searchButtonRef.current?.classList.add('bg-gray-100', 'rounded-r-full');
       cx.backButtonRef.current?.classList.remove('hidden');
