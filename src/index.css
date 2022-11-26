@@ -9,3 +9,39 @@
 .custom-box-shadow {
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
+
+.top {
+  @screen md {
+    @apply relative flex py-0 w-full;
+  }
+}
+// ctx.mainRef.current?.classList.add('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
+
+.main {
+  @apply absolute left-0 right-0 w-full top-0 bg-white;
+  @screen md {
+    @apply relative z-30;
+  }
+}
+
+.box {
+  @screen md {
+    @apply w-full rounded-l-full border border-gray-300 relative block;
+  }
+
+}
+
+.box-middle {
+  @apply flex justify-end;
+  @screen md {
+    @apply flex w-full;
+  }
+}
+
+.search-button {
+  @screen md {
+    @apply w-16 h-10 flex justify-center items-center relative border border-l-0 border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200 transition-all;
+  }
+}
+
+
