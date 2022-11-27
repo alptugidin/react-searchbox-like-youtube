@@ -19,7 +19,7 @@
 }
 
 .input {
-  @apply  h-full w-full outline-none pl-4 rounded-r-none rounded-l-full
+  @apply  w-full outline-none pl-4 rounded-r-none rounded-l-full pr-9
 }
 
 .input-search-button {
@@ -36,8 +36,8 @@
 
 .input-clear-button {
   @apply w-8 h-8 p-1 absolute right-[71px] bg-white mt-[3px] rounded-full hover:bg-black hover:bg-opacity-10
-  /* @apply w-10 h-full flex items-center justify-center */
 }
-/* .input-clear-button-svg { */
-  /* @apply w-7 hover:bg-black hover:bg-opacity-10 rounded-full */
-/* } */
+
+.search-popup {
+  @apply absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] hidden bg-opacity-80
+}
