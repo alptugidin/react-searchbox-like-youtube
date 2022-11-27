@@ -15,7 +15,7 @@ const Input = (): JSX.Element => {
   const handleClear = (): void => {
     ctx.setValue('');
     ctx.setTempVal('');
-    setTimeout(() => ctx.inputRef.current?.focus(), 0.1);
+    ctx.inputRef.current?.focus();
   };
 
   return (
@@ -32,19 +32,24 @@ const Input = (): JSX.Element => {
         placeholder='Search'
         className='input'
       />
-      { ctx.tempVal.length > 0 &&
       <button
         onClick={handleClear}
-        className='input-clear-button'>
+        ref={ctx.clearButtonRef}
+        className={`input-clear-button ${ctx.tempVal.length > 0 ? '' : 'hidden'}`}>
         <div className='input-clear-button-svg'>
           <Clear />
         </div>
       </button>
-      }
       <button
-        ref={ctx.clearButtonRef}
-        className='input-search-button'>
+        ref={ctx.searchButtonRef}
+        className='input-search-button group'>
         <Search size='normal'/>
+        <div
+          ref={ctx.modalRef}
+          role='searchModal'
+          className='search-popup group-hover:block'>
+          <p>Search!</p>
+        </div>
       </button>
     </div>
   );
