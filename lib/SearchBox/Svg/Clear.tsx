@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ClearSVG: React.FC = () => {
+const Clear: React.FC = () => {
   return (
     <div>
       <svg
@@ -15,4 +15,4 @@ const ClearSVG: React.FC = () => {
   );
 };
 
-export default ClearSVG;
+export default Clear;

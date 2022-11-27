@@ -19,6 +19,11 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
+  /** @brancRef */
+  const inputSearchIconRef = useRef<HTMLDivElement>(null);
+  const clearButtonRef = useRef<HTMLButtonElement>(null);
+  /** @brancRef */
+
   const { isMobile } = useIsMobile();
   const [showSB, setShowSB] = useState(false);
   const [value, setValue] = useState('');
@@ -71,13 +76,17 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     value,
     setValue,
     tempVal,
-    setTempVal
+    setTempVal,
+    /** @branchRef */
+    inputSearchIconRef,
+    clearButtonRef
+    /** @branchRef */
   };
 
   useEffect(() => {
     const listener = (e: MouseEvent): void => {
       if (!mainRef.current?.contains(e.target as HTMLDivElement)) {
-        setBlurSB();
+        inputSearchIconRef.current?.classList.add('!hidden');
       }
     };
     window.addEventListener('click', listener);
@@ -88,7 +97,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     <div
       ref={mainRef}
       id='sbly'
-      className='relative z-30'>
+      className='searchbox'>
       <SearchBoxContext.Provider value={ctxValue}>
         <Input/>
         <Results/>

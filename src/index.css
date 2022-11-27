@@ -10,38 +10,34 @@
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
-.top {
-  @screen md {
-    @apply relative flex py-0 w-full;
-  }
-}
-// ctx.mainRef.current?.classList.add('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
-
-.main {
-  @apply absolute left-0 right-0 w-full top-0 bg-white;
-  @screen md {
-    @apply relative z-30;
-  }
+.searchbox {
+  
 }
 
-.box {
-  @screen md {
-    @apply w-full rounded-l-full border border-gray-300 relative block;
-  }
-
+.input-comp {
+  @apply w-full h-10 rounded-full border border-gray-300 flex relative
 }
 
-.box-middle {
-  @apply flex justify-end;
-  @screen md {
-    @apply flex w-full;
-  }
+.input {
+  @apply  h-full w-full outline-none pl-4 rounded-r-none rounded-l-full
 }
 
-.search-button {
-  @screen md {
-    @apply w-16 h-10 flex justify-center items-center relative border border-l-0 border-gray-300 rounded-r-full bg-gray-100 hover:bg-gray-200 transition-all;
-  }
+.input-search-button {
+  @apply 
+  w-20 bg-gray-100 flex items-center justify-center rounded-r-full
+  border border-l-gray-300 border-y-0 border-r-0 hover:bg-gray-300 
+  transition-all
+}
+.input-search-icon {
+  @apply 
+  absolute -top-[1px] bg-white h-[40px] w-10 flex items-center justify-center -left-[24px]
+  border border-l-gray-300 border-y-gray-300 border-r-0 rounded-l-full
 }
 
-
+.input-clear-button {
+  @apply w-8 h-8 p-1 absolute right-[71px] bg-white mt-[3px] rounded-full hover:bg-black hover:bg-opacity-10
+  /* @apply w-10 h-full flex items-center justify-center */
+}
+/* .input-clear-button-svg { */
+  /* @apply w-7 hover:bg-black hover:bg-opacity-10 rounded-full */
+/* } */
