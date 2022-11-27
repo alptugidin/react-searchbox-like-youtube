@@ -36,6 +36,10 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     setValue: React.Dispatch<React.SetStateAction<string>>
     tempVal: string
     setTempVal: React.Dispatch<React.SetStateAction<string>>
+    /** @branchType */
+    inputSearchIconRef: React.RefObject<HTMLDivElement>
+    clearButtonRef: React.RefObject<HMLTButtonElement>
+    /** @branchType */
 }
 
 export interface ISearchBoxProvider {
