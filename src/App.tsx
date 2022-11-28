@@ -37,7 +37,7 @@ const App: React.FC = () => {
           results={results}
         />
       </div>
-      <div className='w-2/12 flex justify-end'>
+      <div className='md:w-3/12 w-2/12 flex justify-end'>
         <div className='w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center'>
           <img src="/src/assets/user.png" className='w-5 h-5 opacity-50' alt="avatar" />
         </div>
