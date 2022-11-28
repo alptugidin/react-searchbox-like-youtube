@@ -20,8 +20,8 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     topRef: React.RefObject<HTMLDivElement>
     rightDivRef: React.RefObject<HTMLDivElement>
     middleDivRef: React.RefObject<HTMLDivElement>
-    searchButtonRef: React.RefObject<HMLTButtonElement>
-    backButtonRef: React.RefObject<HMLTButtonElement>
+    searchButtonRef: React.RefObject<HTMLButtonElement>
+    backButtonRef: React.RefObject<HTMLButtonElement>
     inputRef: React.RefObject<HTMLInputElement>
     resultRef: React.RefObject<HTMLDivElement>
     boxRef: React.RefObject<HTMLDivElement>
@@ -38,7 +38,8 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     setTempVal: React.Dispatch<React.SetStateAction<string>>
     /** @branchType */
     inputSearchIconRef: React.RefObject<HTMLDivElement>
-    clearButtonRef: React.RefObject<HMLTButtonElement>
+    clearButtonRef: React.RefObject<HTMLButtonElement>
+    respBgRef: React.RefObject<HTMLDivElement>
     /** @branchType */
 }
 
