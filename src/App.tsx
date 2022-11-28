@@ -4,7 +4,8 @@ import { ISearchResult } from '../lib/types';
 const App: React.FC = () => {
   const [results] = useState(
     [
-      { id: 1, title: 'Javascript tutorials' },
+      { id: 0, title: 'Javascript tutorials' },
+      { id: 1, title: 'Javascript tutorials 2' },
       { id: 2, title: 'Java tutorials' },
       { id: 3, title: 'Kotlin tutorials' },
       { id: 4, title: 'Swift tutorials' },
@@ -25,7 +26,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className='h-14 w-full bg-white flex justify-evenly items-center'>
+    <div className='h-12 w-full bg-white flex justify-evenly items-center'>
       <div className='md:w-3/12 w-2/12  flex justify-center'>
         <div className='w-full h-10 rounded-full bg-gray-200'></div>
       </div>
