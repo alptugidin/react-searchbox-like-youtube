@@ -32,6 +32,14 @@ const Results = (): JSX.Element => {
   const handleOnClick = (item: ISearchResult): void => {
     ctx.setTempVal(item.title);
     ctx.setValue('');
+    if (ctx.isMobile) {
+      ctx.respBgRef.current?.classList.add('hidden');
+      // ctx.searchButtonRef.current?.classList.add('!hidden');
+      // ctx.clearButtonRef.current?.classList.add('!right-3');
+      // ctx.inputRef.current?.classList.add('!rounded-r-full');
+      // ctx.backButtonRef.current?.classList.add('!hidden');
+      // ctx.inputRef.current?.parentElement?.classList.add('mx-auto');
+    }
   };
 
   const handleSelect = (title: string): void => {
@@ -45,36 +53,33 @@ const Results = (): JSX.Element => {
   }, [ctx.value]);
 
   return (
-    <div className='md:w-[calc(100%_-_33px)] w-full bg-white custom-box-shadow md:rounded-xl rounded-none absolute md:top-11 top-[48px] md:-left-[26px] left-0 md:overflow-hidden overflow-visible'>
-      {ctx.value !== '' && resultsLen > 0 && (
-        <ul role='listResults' className='md:py-3'>
-          <div className='bg-white absolute left-0 -top-1 right-0 h-1.5'></div>
-          {
-            ctx.results.filter(item => filteringCondition(item.title)).map(item => (
-              <li key={item.id} className='flex h-[38px] items-center border-b-[1px] md:border-none border-gray-100 md:py-0 md:px-0 pl-2'>
-                <button
-                  type='button'
-                  onClick={() => handleOnClick(item)}
-                  className='flex items-center cursor-default md:hover:bg-gray-100 h-8 leading-8 w-full'>
-                  { !ctx.isMobile &&
-                    <div className='w-12 flex justify-center items-center'>
-                      <Search size='mini' />
-                    </div>
-                  }
-                  {highlightedResult(item.title)}
-                </button>
-                <button
-                  type='button'
-                  onClick={() => handleSelect(item.title)}
-                  className='bg-gray-100 w-[38px] h-full flex items-center justify-center'>
-                  <Arrow/>
-                </button>
-              </li>
-            ))
-          }
+    <>
+      {resultsLen > 0 &&
+      <div ref={ctx.resultRef} className='results'>
+        <div className='ghost' />
+        <ul className='results-ul'>
+          { ctx.results.filter(item => filteringCondition(item.title)).map(item =>
+            <li
+              key={item.id}
+              className='results-li'>
+              <button
+                className='w-full text-left'
+                onClick={() => handleOnClick(item)}
+              >
+                <div className='results-li-icon'>
+                  <Search size='mini'/>
+                </div>
+                {highlightedResult(item.title)}
+              </button>
+              <button type='button' onClick={() => handleSelect(item.title)} className='arrow'>
+                <Arrow/>
+              </button>
+            </li>
+          )}
         </ul>
-      )}
-    </div>
+      </div>
+      }
+    </>
   );
 };
 

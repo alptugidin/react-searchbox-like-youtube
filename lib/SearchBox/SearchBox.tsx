@@ -3,6 +3,7 @@ import { Input } from './Input';
 import { Results } from './Results';
 import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
+import { Search } from './Svg';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 
@@ -18,7 +19,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-
+  const respBgRef = useRef<HTMLDivElement>(null);
   /** @brancRef */
   const inputSearchIconRef = useRef<HTMLDivElement>(null);
   const clearButtonRef = useRef<HTMLButtonElement>(null);
@@ -33,7 +34,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   const setBlurSB = (): void => {
     if (isMobile) {
       setShowSB(false);
-      mainRef.current?.classList.remove('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
+      // mainRef.current?.classList.remove('!absolute', 'left-0', 'right-0', 'w-full', 'top-0', 'bg-white');
       topRef.current?.classList.remove('custom-box-shadow');
       topRef.current?.classList.add('justify-end');
       searchButtonRef.current?.classList.remove('bg-gray-100', 'rounded-r-full');
@@ -50,6 +51,11 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
         leftSvgRef.current?.classList.remove('shadow-inner');
       }
     }
+  };
+
+  const handleClick = (): void => {
+    mainRef.current?.classList.remove('!hidden');
+    inputRef.current?.focus();
   };
 
   const ctxValue = {
@@ -79,7 +85,8 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     setTempVal,
     /** @branchRef */
     inputSearchIconRef,
-    clearButtonRef
+    clearButtonRef,
+    respBgRef
     /** @branchRef */
   };
 
@@ -87,6 +94,10 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     const listener = (e: MouseEvent): void => {
       if (!mainRef.current?.contains(e.target as HTMLDivElement)) {
         inputSearchIconRef.current?.classList.add('!hidden');
+        setValue('');
+      }
+      if (respBgRef.current?.contains(e.target as HTMLDivElement)) {
+        mainRef.current?.classList.add('!hidden');
       }
     };
     window.addEventListener('click', listener);
@@ -94,15 +105,23 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   }, []);
 
   return (
-    <div
-      ref={mainRef}
-      id='sbly'
-      className='searchbox'>
-      <SearchBoxContext.Provider value={ctxValue}>
+    <SearchBoxContext.Provider value={ctxValue}>
+      { isMobile &&
+        <button
+          onClick={handleClick}
+          type='button'
+          className='w-fit block ml-auto'>
+          <Search size='normal'/>
+        </button>
+      }
+      <div
+        ref={mainRef}
+        id='sbly'
+        className={`searchbox ${isMobile ? '!hidden' : ''}`}>
         <Input/>
         <Results/>
-      </SearchBoxContext.Provider>
-    </div>
+      </div>
+    </SearchBoxContext.Provider>
   );
 };
 export const useSearchBoxContext = (): ISearchBoxContext => {
