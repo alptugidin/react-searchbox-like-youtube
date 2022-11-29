@@ -27,6 +27,7 @@ const Input = (): JSX.Element => {
     ctx.setValue('');
     ctx.setTempVal('');
     ctx.mainRef.current?.classList.add('!hidden');
+    ctx.respSbButton.current?.classList.remove('hidden');
   };
 
   return (
@@ -43,7 +44,7 @@ const Input = (): JSX.Element => {
           </button>
         )
         : (
-          <div ref={ctx.inputSearchIconRef} className='input-search-icon !hidden'>
+          <div role='leftSearchSVG' ref={ctx.inputSearchIconRef} className='input-search-icon !hidden'>
             <Search size='mini' />
           </div>
         )
@@ -55,7 +56,7 @@ const Input = (): JSX.Element => {
           onFocus={handleFocus}
           onChange={handleOnChange}
           value={ctx.tempVal}
-          placeholder='Search'
+          placeholder='Search something'
           className='input'
         />
         <button
@@ -68,13 +69,14 @@ const Input = (): JSX.Element => {
         </button>
         <button
           ref={ctx.searchButtonRef}
+          role='SearchButton'
           onClick={handleSearch}
           className='input-search-button group'>
           <Search size='normal'/>
           { !ctx.isMobile &&
         <div
           ref={ctx.modalRef}
-          role='searchModal'
+          role='SearchModal'
           className='search-popup group-hover:block'>
           <p>Search!</p>
         </div>
