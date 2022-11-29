@@ -34,11 +34,9 @@ const Results = (): JSX.Element => {
     ctx.setValue('');
     if (ctx.isMobile) {
       ctx.respBgRef.current?.classList.add('hidden');
-      // ctx.searchButtonRef.current?.classList.add('!hidden');
-      // ctx.clearButtonRef.current?.classList.add('!right-3');
-      // ctx.inputRef.current?.classList.add('!rounded-r-full');
-      // ctx.backButtonRef.current?.classList.add('!hidden');
-      // ctx.inputRef.current?.parentElement?.classList.add('mx-auto');
+      ctx.mainRef.current?.classList.add('!hidden');
+      ctx.respSbButton.current?.classList.add('hidden');
+      ctx.mockInputRef.current?.classList.remove('hidden');
     }
   };
 
@@ -63,7 +61,7 @@ const Results = (): JSX.Element => {
               key={item.id}
               className='results-li'>
               <button
-                className='w-full text-left'
+                className='w-full text-left flex'
                 onClick={() => handleOnClick(item)}
               >
                 <div className='results-li-icon'>
