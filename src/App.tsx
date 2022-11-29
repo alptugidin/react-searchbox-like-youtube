@@ -27,8 +27,8 @@ const App: React.FC = () => {
 
   return (
     <div className='h-12 w-full bg-white flex justify-evenly items-center'>
-      <div className='md:w-3/12 w-2/12  flex justify-center'>
-        <div className='w-full h-10 rounded-full bg-gray-200'></div>
+      <div className='md:w-3/12 w-2/12 flex justify-start'>
+        <div className='md:w-1/2 w-full h-10 rounded-full bg-gradient-to-r from-red-300 to-red-600'></div>
       </div>
       <div className='md:w-[500px] w-6/12'>
         <SearchBox
@@ -38,8 +38,8 @@ const App: React.FC = () => {
         />
       </div>
       <div className='md:w-3/12 w-2/12 flex justify-end'>
-        <div className='w-10 h-10 rounded-full bg-gray-200 flex justify-center items-center'>
-          <img src="/src/assets/user.png" className='w-5 h-5 opacity-50' alt="avatar" />
+        <div className='w-10 h-10 rounded-full bg-gradient-to-r from-red-300 to-red-600 flex justify-center items-center'>
+          <img src="/src/assets/user.png" className='w-5 h-5 opacity-90' alt="avatar" />
         </div>
       </div>
     </div>
