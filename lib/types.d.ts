@@ -40,6 +40,8 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     inputSearchIconRef: React.RefObject<HTMLDivElement>
     clearButtonRef: React.RefObject<HTMLButtonElement>
     respBgRef: React.RefObject<HTMLDivElement>
+    mockInputRef: React.RefObject<HTMLDivElement>
+    respSbButton: React.RefObject<HTMLButtonElement>
     /** @branchType */
 }
 
