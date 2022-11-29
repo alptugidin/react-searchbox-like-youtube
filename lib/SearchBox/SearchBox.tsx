@@ -3,7 +3,7 @@ import { Input } from './Input';
 import { Results } from './Results';
 import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
-import { Search } from './Svg';
+import { Clear, Search } from './Svg';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 
@@ -19,10 +19,12 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  const respBgRef = useRef<HTMLDivElement>(null);
   /** @brancRef */
+  const respBgRef = useRef<HTMLDivElement>(null);
   const inputSearchIconRef = useRef<HTMLDivElement>(null);
   const clearButtonRef = useRef<HTMLButtonElement>(null);
+  const mockInputRef = useRef<HTMLDivElement>(null);
+  const respSbButton = useRef<HTMLButtonElement>(null);
   /** @brancRef */
 
   const { isMobile } = useIsMobile();
@@ -58,6 +60,11 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     inputRef.current?.focus();
   };
 
+  const handleMockInput = (): void => {
+    mockInputRef.current?.classList.add('hidden');
+    handleClick();
+  };
+
   const ctxValue = {
     isMobile,
     mainRef,
@@ -86,7 +93,9 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
     /** @branchRef */
     inputSearchIconRef,
     clearButtonRef,
-    respBgRef
+    respBgRef,
+    mockInputRef,
+    respSbButton
     /** @branchRef */
   };
 
@@ -98,6 +107,7 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
       }
       if (respBgRef.current?.contains(e.target as HTMLDivElement)) {
         mainRef.current?.classList.add('!hidden');
+        respSbButton.current?.classList.remove('hidden');
       }
     };
     window.addEventListener('click', listener);
@@ -107,12 +117,27 @@ const SearchBox: React.FC<ISearchBoxProps> = ({ onChange, onClick, results }) =>
   return (
     <SearchBoxContext.Provider value={ctxValue}>
       { isMobile &&
-        <button
-          onClick={handleClick}
-          type='button'
-          className='w-fit block ml-auto'>
-          <Search size='normal'/>
-        </button>
+          <div className='flex'>
+            <div
+              ref={mockInputRef}
+              onClick={handleMockInput}
+              className='w-full hidden'>
+              <div className='w-full h-8 bg-gray-100 rounded-lg items-center px-1.5 flex justify-between'>
+                <span className='truncate text-sm text-gray-500'>{tempVal}</span>
+                <div className='w-6 h-6'>
+                  <Clear/>
+                </div>
+              </div>
+            </div>
+            <button
+              ref={respSbButton}
+              role='responsive-search-button'
+              type='button'
+              onClick={handleClick}
+              className='w-fit block ml-auto'>
+              <Search size='normal'/>
+            </button>
+          </div>
       }
       <div
         ref={mainRef}
