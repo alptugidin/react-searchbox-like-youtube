@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { useSearchBoxContext } from '../SearchBox';
 import { Back, Clear, Search } from '../Svg';
+
 const Input = (): JSX.Element => {
   const ctx = useSearchBoxContext();
-
+  const [showPopup, setShowPopup] = useState(false);
   const handleFocus = (): void => {
-    ctx.inputSearchIconRef.current?.classList.remove('!hidden');
+    ctx.setShowLeftSearchSvg(true);
     ctx.respBgRef.current?.classList.remove('hidden');
   };
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     if (e.target.value === ' ') return undefined;
     ctx.setValue(e.target.value);
     ctx.setTempVal(e.target.value);
+    ctx.onChange(e.target.value);
   };
 
   const handleClear = (): void => {
@@ -21,35 +23,50 @@ const Input = (): JSX.Element => {
   };
 
   const handleSearch = (): void => {
+    console.log('sex');
   };
 
   const handleBack = (): void => {
     ctx.setValue('');
     ctx.setTempVal('');
-    ctx.mainRef.current?.classList.add('!hidden');
+    ctx.setShowSB(false);
+    ctx.setShowDummyInput(false);
     ctx.respSbButton.current?.classList.remove('hidden');
+  };
+
+  const handleSearchHover = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    switch (e.type) {
+    case 'mouseenter':
+      setShowPopup(true);
+      ctx.searchButtonRef.current?.classList.add('foo');
+      break;
+    case 'mouseleave':
+      setShowPopup(false);
+      break;
+    }
   };
 
   return (
     <div className='relative flex w-full'>
-      { ctx.isMobile
+      {ctx.isMobile
         ? (
           <button
             type='button'
             onClick={handleBack}
             ref={ctx.backButtonRef}
-            role='BackButton'
+            role='back-button'
             className='input-back-button'>
-            <Back />
+            <Back/>
           </button>
         )
         : (
-          <div role='leftSearchSVG' ref={ctx.inputSearchIconRef} className='input-search-icon !hidden'>
-            <Search size='mini' />
-          </div>
+          ctx.showLeftSearchSvg &&
+                <div role='inputSearchIcon' ref={ctx.inputSearchIconRef} className='input-search-icon'>
+                  <Search size='mini'/>
+                </div>
         )
       }
-      <div className={`input-comp ${ctx.tempVal.length > 0 ? 'input-comp-resp' : ''}`}>
+      <div className={`input-comp ${ctx.tempVal.length > 0 ? 'input-comp-resp !bg-red-500' : ''}`}>
         <input
           type="text"
           ref={ctx.inputRef}
@@ -64,27 +81,31 @@ const Input = (): JSX.Element => {
           ref={ctx.clearButtonRef}
           className={`input-clear-button ${ctx.tempVal.length > 0 ? '' : 'hidden'}`}>
           <div className='input-clear-button-svg'>
-            <Clear />
+            <Clear/>
           </div>
         </button>
+
         <button
           ref={ctx.searchButtonRef}
           role='SearchButton'
           onClick={handleSearch}
-          className='input-search-button group'>
+          onMouseEnter={handleSearchHover}
+          onMouseLeave={handleSearchHover}
+          className='input-search-button'>
           <Search size='normal'/>
-          { !ctx.isMobile &&
-        <div
-          ref={ctx.modalRef}
-          role='SearchModal'
-          className='search-popup group-hover:block'>
-          <p>Search!</p>
-        </div>
+
+          {showPopup && !ctx.isMobile &&
+                <div
+                  ref={ctx.modalRef}
+                  role='popup'
+                  className='search-popup'>
+                  <p>Search!</p>
+                </div>
           }
         </button>
       </div>
-      { ctx.isMobile &&
-        <div ref={ctx.respBgRef} className='resp-background' role='mobileBackground'/>
+      {ctx.isMobile &&
+            <div ref={ctx.respBgRef} className='resp-background' role='responsive-bg'/>
       }
     </div>
   );
