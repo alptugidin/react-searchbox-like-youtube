@@ -16,11 +16,11 @@ const Results = (): JSX.Element => {
   };
 
   const highlightedResult = (title: string): JSX.Element => {
-    let span = <span className=''>{title}</span>;
+    let span = <span role='results-text' className=''>{title}</span>;
     const splitted = title.split(new RegExp(`(${ctx.value})`, 'gi'));
     if (splitted.length > 1) {
       span =
-        <div className='text-sm md:text-base'>
+        <div role='results-text' className='text-sm md:text-base'>
           <span >{splitted[0]}</span>
           <span className='font-semibold' >{splitted[1]}</span>
           <span >{splitted[2]}</span>
@@ -32,11 +32,14 @@ const Results = (): JSX.Element => {
   const handleOnClick = (item: ISearchResult): void => {
     ctx.setTempVal(item.title);
     ctx.setValue('');
+    ctx.onClick(item);
     if (ctx.isMobile) {
       ctx.respBgRef.current?.classList.add('hidden');
-      ctx.mainRef.current?.classList.add('!hidden');
+      // ctx.mainRef.current?.classList.add('!hidden');
+      ctx.setShowSB(false);
+      ctx.setShowDummyInput(true);
       ctx.respSbButton.current?.classList.add('hidden');
-      ctx.mockInputRef.current?.classList.remove('hidden');
+      ctx.dummyInputRef.current?.classList.remove('hidden');
     }
   };
 
@@ -55,7 +58,7 @@ const Results = (): JSX.Element => {
       {resultsLen > 0 &&
       <div ref={ctx.resultRef} className='results'>
         <div className='ghost' />
-        <ul className='results-ul'>
+        <ul role='search-results' className='results-ul'>
           { ctx.results.filter(item => filteringCondition(item.title)).map(item =>
             <li
               key={item.id}
@@ -64,12 +67,14 @@ const Results = (): JSX.Element => {
                 className='w-full text-left flex'
                 onClick={() => handleOnClick(item)}
               >
+                {!ctx.isMobile &&
                 <div className='results-li-icon'>
                   <Search size='mini'/>
                 </div>
+                }
                 {highlightedResult(item.title)}
               </button>
-              <button type='button' onClick={() => handleSelect(item.title)} className='arrow'>
+              <button type='button' role='arrow-button' onClick={() => handleSelect(item.title)} className='arrow'>
                 <Arrow/>
               </button>
             </li>
