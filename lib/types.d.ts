@@ -10,11 +10,14 @@ export interface ISearchResult {
 }
 export interface ISearchBoxProps {
     results: ISearchResult[]
-    onChange: (onChangeData?: string) => void
-    onClick: (onClickData?: ISearchResult) => void
+    onChange: (onChangeData: string) => void
+    onClick: (onClickData: ISearchResult) => void
+    sx?: {
+        backgroundColor?: string
+    }
 }
 
-export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange' | 'onClick'> {
+export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange' | 'onClick' | 'sx'> {
     isMobile: boolean
     mainRef: React.RefObject<HTMLDivElement>
     topRef: React.RefObject<HTMLDivElement>
@@ -29,7 +32,6 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     modalRef: React.RefObject<HTMLDivElement>
     setShowSB: React.Dispatch<React.SetStateAction<boolean>>
     showSB: boolean
-    setBlurSB: () => void
     filteredResults: ISearchResult[]
     setFilteredResults: React.Dispatch<React.SetStateAction<ISearchResult[]>>
     value: string
@@ -40,8 +42,12 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     inputSearchIconRef: React.RefObject<HTMLDivElement>
     clearButtonRef: React.RefObject<HTMLButtonElement>
     respBgRef: React.RefObject<HTMLDivElement>
-    mockInputRef: React.RefObject<HTMLDivElement>
+    dummyInputRef: React.RefObject<HTMLDivElement>
     respSbButton: React.RefObject<HTMLButtonElement>
+    showLeftSearchSvg: boolean
+    setShowLeftSearchSvg: React.Dispatch<React.SetStateAction<boolean>>
+    showDummyInput: boolean
+    setShowDummyInput: React.Dispatch<React.SetStateAction<boolean>>
     /** @branchType */
 }
 
