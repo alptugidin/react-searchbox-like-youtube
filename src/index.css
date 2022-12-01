@@ -10,14 +10,23 @@
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
+@layer base {
+  .dark-bg {
+    background: var(--darkBg);
+  }
+  .light-bg {
+    background: var(--lightBg)
+  }
+}
+
 .searchbox {
-  @apply flex absolute top-0 left-0 right-0 z-30  rounded-full custom-box-shadow bg-white;
+  @apply flex absolute top-0 left-0 right-0 z-30  rounded-full custom-box-shadow light-bg dark:dark-bg border border-gray-300 transition-all;
   @screen md {
     @apply relative z-30 flex shadow-none;
   }
 }
 .input-comp {
-    @apply w-full md:h-10 h-8 rounded-full md:border md:border-gray-300 flex relative basis-9/12 md:basis-full;
+  @apply w-full md:h-10 h-8 rounded-full  flex relative basis-9/12 md:basis-full;
 }
 
 .input-comp-resp {
@@ -25,7 +34,7 @@
 }
 
 .input {
-  @apply w-full outline-none pl-4 rounded-r-none rounded-l-full md:pr-9 block bg-transparent shadow-inner; 
+  @apply w-full outline-none pl-4 rounded-r-none rounded-l-full md:pr-9 block bg-transparent;
 }
 
 .input-extend {
@@ -37,8 +46,8 @@
 }
 
 .input-search-icon {
-  @apply absolute -top-0 bg-white h-10 w-10 flex items-center justify-center -left-[24px] 
-  border border-l-gray-300 border-y-gray-300 border-r-0 rounded-l-full z-30 shadow-inner;
+  @apply absolute -top-[1px] bg-white h-[42px] w-10 flex items-center justify-center -left-[24px] 
+  border border-l-gray-300 border-y-gray-300 border-r-0 rounded-l-full z-30;
 }
 
 .input-clear-button {
@@ -58,20 +67,17 @@
 }
 
 .results {
-  @apply 
-  md:w-11/12 w-full absolute md:top-[52px] top-12 md:-left-[24px] left-0 right-0 
+  @apply md:w-11/12 w-full absolute md:top-[52px] top-12 md:-left-[24px] left-0 right-0 
   border border-gray-200 md:rounded-xl rounded-none md:py-3 py-0 custom-box-shadow bg-white;
 }
 
 .results-li {
-  @apply 
-  flex items-center md:justify-start justify-between md:hover:bg-black md:hover:bg-opacity-10 cursor-default h-9 md:p-0 pl-2
-  md:border-none border-b border-gray-100 last:border-b-0
+  @apply flex items-center md:justify-start justify-between md:hover:bg-black md:hover:bg-opacity-10 cursor-default h-9 md:p-0 pl-2
+  md:border-none border-b border-gray-100 last:border-b-0;
 }
 
-
 .results-li-icon {
-    @apply w-10 flex justify-center;
+  @apply w-10 flex justify-center;
 }
 
 .ghost {
@@ -84,13 +90,3 @@
     @apply hidden;
   }
 }
-
-
-
-
-
-
-
-
-
-
