@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, CSSProperties, useContext, useEffect, useRef, useState } from 'react';
 import { Input } from './Input';
 import { Results } from './Results';
+import { Search } from './Svg';
 import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
-import { Clear, Search } from './Svg';
 import DummyInput from './DummyInput/DummyInput';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
@@ -13,9 +13,25 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     onChange,
     onClick,
     results,
-    sx = { backgroundColor: '#ffffff' }
+    nightMode = false,
+    sx = {}
+    // sx = {
+    // lightBg: '#ffffff',
+    // darkBg: '#0F0F0F'
+    // }
   }
 ) => {
+  const {
+    lightBg = '#FFFFFF',
+    darkBg = '#0F0F0F'
+  } = sx;
+
+  const { isMobile } = useIsMobile();
+  const [showSB, setShowSB] = useState(true);
+  const [value, setValue] = useState('');
+  const [tempVal, setTempVal] = useState('');
+  const [filteredResults, setFilteredResults] = useState<ISearchResult[]>([]);
+
   const mainRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const searchButtonRef = useRef<HTMLButtonElement>(null);
@@ -27,7 +43,8 @@ const SearchBox: React.FC<ISearchBoxProps> = (
   const boxRef = useRef<HTMLDivElement>(null);
   const leftSvgRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
-  /** @brancRef */
+
+  /** @branchDefinitions */
   const [showLeftSearchSvg, setShowLeftSearchSvg] = useState(false);
   const [showDummyInput, setShowDummyInput] = useState(false);
   const respBgRef = useRef<HTMLDivElement>(null);
@@ -35,13 +52,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
   const clearButtonRef = useRef<HTMLButtonElement>(null);
   const dummyInputRef = useRef<HTMLDivElement>(null);
   const respSbButton = useRef<HTMLButtonElement>(null);
-  /** @brancRef */
-
-  const { isMobile } = useIsMobile();
-  const [showSB, setShowSB] = useState(true);
-  const [value, setValue] = useState('');
-  const [tempVal, setTempVal] = useState('');
-  const [filteredResults, setFilteredResults] = useState<ISearchResult[]>([]);
+  /** @branchDefinitions */
 
   const handleClick = (): void => {
     setShowSB(true);
@@ -80,7 +91,9 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     showLeftSearchSvg,
     setShowLeftSearchSvg,
     showDummyInput,
-    setShowDummyInput
+    setShowDummyInput,
+    darkBg,
+    lightBg
     /** @branchRef */
   };
 
@@ -113,9 +126,18 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     if (isMobile && showSB) inputRef.current?.focus();
   }, [showSB]);
 
+  useEffect(() => {
+    if (nightMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [nightMode]);
+
   return (
     <SearchBoxContext.Provider value={ctxValue}>
-      { isMobile &&
+      <div style={{ '--lightBg': lightBg, '--darkBg': darkBg } as CSSProperties}>
+        { isMobile &&
           <div className='flex'>
             {showDummyInput && <DummyInput/> }
             <button
@@ -127,16 +149,17 @@ const SearchBox: React.FC<ISearchBoxProps> = (
               <Search size='normal'/>
             </button>
           </div>
-      }
-      {showSB &&
-      <div
-        ref={mainRef}
-        id='sbly'
-        className='searchbox'>
-        <Input/>
-        <Results/>
+        }
+        {showSB &&
+        <div
+          ref={mainRef}
+          id='sbly'
+          className='searchbox'>
+          <Input />
+          <Results/>
+        </div>
+        }
       </div>
-      }
     </SearchBoxContext.Provider>
   );
 };
