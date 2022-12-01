@@ -12,12 +12,16 @@ export interface ISearchBoxProps {
     results: ISearchResult[]
     onChange: (onChangeData: string) => void
     onClick: (onClickData: ISearchResult) => void
+    nightMode?: boolean
     sx?: {
-        backgroundColor?: string
+        lightBg?: string
+        darkBg?: string
     }
 }
 
-export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'onChange' | 'onClick' | 'sx'> {
+export interface ISearchBoxContext extends Pick<ISearchBoxProps,
+    'results' | 'onChange' | 'onClick' | 'sx' | 'nightMode'
+    > {
     isMobile: boolean
     mainRef: React.RefObject<HTMLDivElement>
     topRef: React.RefObject<HTMLDivElement>
@@ -48,9 +52,11 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps, 'results' | 'on
     setShowLeftSearchSvg: React.Dispatch<React.SetStateAction<boolean>>
     showDummyInput: boolean
     setShowDummyInput: React.Dispatch<React.SetStateAction<boolean>>
+    lightBg: string
+    darkBg: string
     /** @branchType */
 }
 
 export interface ISearchBoxProvider {
     children: React.ReactNode
-  }
+}
