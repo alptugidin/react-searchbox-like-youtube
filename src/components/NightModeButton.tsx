@@ -9,13 +9,8 @@ interface INightModeButton {
 
 const NightModeButton: React.FC<INightModeButton> = (props) => {
   const { setNightMode, nightMode } = props;
-  //   useEffect(() => {
-  //     if (nightMode) {
-  //       document.body.style.background = 'black';
-  //     } else {
-  //       document.body.style.background = 'white';
-  //     }
-  //   }, [nightMode]);
+  const ctx = useSearchBoxContext();
+
   return (
     <button
       type='button'
