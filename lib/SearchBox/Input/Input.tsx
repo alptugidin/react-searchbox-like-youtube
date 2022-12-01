@@ -23,7 +23,7 @@ const Input = (): JSX.Element => {
   };
 
   const handleSearch = (): void => {
-    console.log('sex');
+    // add onSearch
   };
 
   const handleBack = (): void => {
@@ -61,12 +61,15 @@ const Input = (): JSX.Element => {
         )
         : (
           ctx.showLeftSearchSvg &&
-                <div role='inputSearchIcon' ref={ctx.inputSearchIconRef} className='input-search-icon'>
+                <div
+                  ref={ctx.inputSearchIconRef}
+                  role='inputSearchIcon'
+                  className='input-search-icon'>
                   <Search size='mini'/>
                 </div>
         )
       }
-      <div className={`input-comp ${ctx.tempVal.length > 0 ? 'input-comp-resp !bg-red-500' : ''}`}>
+      <div className={`input-comp ${ctx.tempVal.length > 0 ? 'input-comp-resp' : ''}`}>
         <input
           type="text"
           ref={ctx.inputRef}
@@ -107,6 +110,7 @@ const Input = (): JSX.Element => {
       {ctx.isMobile &&
             <div ref={ctx.respBgRef} className='resp-background' role='responsive-bg'/>
       }
+
     </div>
   );
 };
