@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "dist": "npx tsup && npm run dist:css && npm run dist:copy",
-    "dist:css": "postcss src/index.scss -o dist/index.css",
+    "dist:css": "postcss src/index.css -o dist/index.css",
     "dist:copy": "copy package.json dist",
     "test": "vitest",
     "coverage": "vitest run --coverage"
