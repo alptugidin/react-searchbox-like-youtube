@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSearchBoxContext } from '../SearchBox';
 import { Back, Clear, Search } from '../Svg';
 
@@ -65,7 +65,7 @@ const Input = (): JSX.Element => {
                   ref={ctx.inputSearchIconRef}
                   role='inputSearchIcon'
                   className='input-search-icon'>
-                  <Search size='mini'/>
+                  <Search size='mini' />
                 </div>
         )
       }
