@@ -1,4 +1,5 @@
 import Search from './Search';
 import Back from './Back';
 import Clear from './Clear';
-export { Search, Back, Clear };
+import SearchLI from './SearchLI';
+export { Search, Back, Clear, SearchLI };
