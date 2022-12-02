@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  .dark-bg {
+    background: var(--darkBg);
+  }
+  .light-bg {
+    background: var(--lightBg);
+  }
+  .dark-border {
+    @apply border-white border-opacity-20;
+  }
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -10,19 +22,11 @@
   box-shadow: 0 2px 4px rgb(0 0 0 / 20%);
 }
 
-@layer base {
-  .dark-bg {
-    background: var(--darkBg);
-  }
-  .light-bg {
-    background: var(--lightBg)
-  }
-}
-
 .searchbox {
-  @apply flex absolute top-0 left-0 right-0 z-30  rounded-full custom-box-shadow light-bg dark:dark-bg border border-gray-300 transition-all;
+  @apply flex absolute top-0 left-0 right-0 z-30 h-12 rounded-none items-center
+   custom-box-shadow transition-all;
   @screen md {
-    @apply relative z-30 flex shadow-none;
+    @apply relative z-30 flex shadow-none rounded-full h-auto bg-white   border border-gray-300;
   }
 }
 .input-comp {
@@ -34,7 +38,7 @@
 }
 
 .input {
-  @apply w-full outline-none pl-4 rounded-r-none rounded-l-full md:pr-9 block bg-transparent;
+  @apply w-full outline-none pl-4 rounded-r-none rounded-l-full md:pr-9 block;
 }
 
 .input-extend {
@@ -42,16 +46,17 @@
 }
 
 .input-search-button {
-  @apply w-20 bg-gray-100 flex items-center justify-center rounded-r-full md:border md:border-l-gray-300 md:border-y-0 md:border-r-0 md:hover:bg-gray-300 transition-all;
+  @apply w-20 bg-gray-100  flex items-center justify-center rounded-r-full md:border md:border-l-gray-300  md:border-y-0 md:border-r-0 md:hover:bg-gray-300 transition-all;
 }
 
 .input-search-icon {
-  @apply absolute -top-[1px] bg-white h-[42px] w-10 flex items-center justify-center -left-[24px] 
+  @apply absolute -top-[1px] bg-white  h-[42px] w-10 flex items-center justify-center -left-[24px] 
   border border-l-gray-300 border-y-gray-300 border-r-0 rounded-l-full z-30;
 }
 
 .input-clear-button {
-  @apply w-8 h-8 p-1 absolute md:right-[71px] right-12 md:bg-white bg-gray-100 md:mt-[3px] rounded-full md:hover:bg-black md:hover:bg-opacity-10;
+  @apply w-8 h-8 p-1 absolute md:right-[71px] right-12 md:mt-[3px] rounded-full
+   md:hover:bg-black md:hover:bg-opacity-10;
 }
 
 .input-back-button {
@@ -68,12 +73,13 @@
 
 .results {
   @apply md:w-11/12 w-full absolute md:top-[52px] top-12 md:-left-[24px] left-0 right-0 
-  border border-gray-200 md:rounded-xl rounded-none md:py-3 py-0 custom-box-shadow bg-white;
+  border  border-gray-200 md:rounded-xl rounded-none md:py-3 py-0 custom-box-shadow
+bg-white;
 }
 
 .results-li {
   @apply flex items-center md:justify-start justify-between md:hover:bg-black md:hover:bg-opacity-10 cursor-default h-9 md:p-0 pl-2
-  md:border-none border-b border-gray-100 last:border-b-0;
+  md:border-none border-b  border-gray-100  last:border-b-0 f ;
 }
 
 .results-li-icon {
@@ -81,7 +87,7 @@
 }
 
 .ghost {
-  @apply md:hidden block absolute left-0 right-0 -top-1 h-2 bg-white;
+  @apply md:hidden block absolute left-0 right-0 -top-1 h-2 bg-white ;
 }
 
 .arrow {
