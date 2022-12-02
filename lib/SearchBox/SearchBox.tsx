@@ -5,9 +5,9 @@ import { Search } from './Svg';
 import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
 import DummyInput from './DummyInput/DummyInput';
+import nightModeListener from '../utils/nightModeListener';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
-
 const SearchBox: React.FC<ISearchBoxProps> = (
   {
     onChange,
@@ -15,10 +15,6 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     results,
     nightMode = false,
     sx = {}
-    // sx = {
-    // lightBg: '#ffffff',
-    // darkBg: '#0F0F0F'
-    // }
   }
 ) => {
   const {
@@ -126,13 +122,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     if (isMobile && showSB) inputRef.current?.focus();
   }, [showSB]);
 
-  useEffect(() => {
-    if (nightMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [nightMode]);
+  nightModeListener(nightMode);
 
   return (
     <SearchBoxContext.Provider value={ctxValue}>
