@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ISearchResult } from '../../types';
 import { useSearchBoxContext } from '../SearchBox';
-import { Search } from '../Svg';
+import { SearchLI } from '../Svg';
 import Arrow from '../Svg/Arrow';
 
 const Results = (): JSX.Element => {
@@ -69,7 +69,7 @@ const Results = (): JSX.Element => {
               >
                 {!ctx.isMobile &&
                 <div className='results-li-icon'>
-                  <Search size='mini'/>
+                  <SearchLI size='mini'/>
                 </div>
                 }
                 {highlightedResult(item.title)}
