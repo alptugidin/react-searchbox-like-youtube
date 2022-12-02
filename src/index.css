@@ -6,11 +6,14 @@
   .dark-bg {
     background: var(--darkBg);
   }
+
   .light-bg {
     background: var(--lightBg);
   }
+
   .dark-border {
-    @apply border-white border-opacity-20;
+    @apply border-white 
+    border-opacity-20;
   }
 }
 
@@ -23,75 +26,213 @@
 }
 
 .searchbox {
-  @apply flex absolute top-0 left-0 right-0 z-30 h-12 rounded-none items-center
-   custom-box-shadow transition-all;
+  @apply flex 
+  absolute 
+  top-0 
+  left-0 
+  right-0 
+  z-30 
+  h-12 
+  rounded-none 
+  items-center
+  custom-box-shadow 
+  md:bg-white
+  dark:md:dark-bg
+  transition-all;
+
   @screen md {
-    @apply relative z-30 flex shadow-none rounded-full h-auto bg-white   border border-gray-300;
+    @apply relative 
+    z-30 
+    flex 
+    shadow-none 
+    rounded-full 
+    h-auto 
+    border 
+    dark:dark-border
+    border-gray-300;
+
   }
 }
-.input-comp {
-  @apply w-full md:h-10 h-8 rounded-full  flex relative basis-9/12 md:basis-full;
-}
 
-.input-comp-resp {
-  @apply basis-10/12 md:basis-full;
+.input-comp {
+  @apply w-full 
+  md:h-10 
+  h-8 
+  rounded-full
+  flex 
+  relative 
+  basis-9/12 
+  md:basis-full;
 }
 
 .input {
-  @apply w-full outline-none pl-4 rounded-r-none rounded-l-full md:pr-9 block;
+  @apply w-full 
+  pl-4 
+  md:pr-9 
+  block 
+  rounded-r-none 
+  rounded-l-full 
+  bg-gray-100 
+  dark:md:dark-bg
+  md:light-bg
+  text-black
+  dark:text-white
+  outline-none; 
 }
 
-.input-extend {
-  @apply absolute left-0 right-0 top-0 w-full h-12 py-2 z-20;
-}
+/* .input-extend {
+  @apply absolute 
+  left-0 
+  right-0 
+  top-0 
+  w-full 
+  h-12 
+  py-2 
+  z-20;
+} */
 
 .input-search-button {
-  @apply w-20 bg-gray-100  flex items-center justify-center rounded-r-full md:border md:border-l-gray-300  md:border-y-0 md:border-r-0 md:hover:bg-gray-300 transition-all;
+  @apply w-20 
+  bg-gray-100
+  flex 
+  items-center 
+  justify-center 
+  rounded-r-full 
+  md:border 
+  md:border-l-gray-300
+  dark:md:border-l-white
+  dark:md:border-opacity-10
+  md:border-y-0 
+  md:border-r-0 
+  md:hover:bg-gray-300 
+  dark:md:bg-white
+  dark:md:bg-opacity-10
+  transition-all;
 }
 
 .input-search-icon {
-  @apply absolute -top-[1px] bg-white  h-[42px] w-10 flex items-center justify-center -left-[24px] 
-  border border-l-gray-300 border-y-gray-300 border-r-0 rounded-l-full z-30;
+  @apply absolute 
+  -top-[1px] 
+  md:bg-white
+  dark:md:dark-bg
+  h-[42px] 
+  w-10 
+  flex 
+  items-center 
+  justify-center 
+  -left-[24px] 
+  border 
+  md:border-l-gray-300 
+  md:border-y-gray-300
+  md:dark:dark-border
+  border-r-0 
+  rounded-l-full 
+  z-30;
 }
 
 .input-clear-button {
-  @apply w-8 h-8 p-1 absolute md:right-[71px] right-12 md:mt-[3px] rounded-full
-   md:hover:bg-black md:hover:bg-opacity-10;
+  @apply w-8 
+  h-8 
+  p-1 
+  absolute 
+  md:right-[71px] 
+  right-12 
+  md:mt-[3px] 
+  rounded-full
+  dark:md:hover:bg-white
+  dark:md:hover:bg-opacity-10
+  md:hover:bg-black 
+  md:hover:bg-opacity-10;
 }
 
 .input-back-button {
-  @apply basis-1/12 px-4;
+  @apply basis-1/12 
+  px-4;
 }
 
 .search-popup {
-  @apply absolute top-14 bg-gray-500 text-white text-xs px-2 py-2 rounded-[4px] bg-opacity-80;
+  @apply absolute 
+  top-14 
+  bg-gray-500 
+  text-white 
+  text-xs 
+  px-2 
+  py-2 
+  rounded-[4px] 
+  bg-opacity-80;
 }
 
 .resp-background {
-  @apply absolute top-10 left-0 right-0 h-screen bg-black bg-opacity-20;
+  @apply absolute 
+  top-10 
+  left-0 
+  right-0 
+  h-screen 
+  bg-black 
+  bg-opacity-20;
 }
 
 .results {
-  @apply md:w-11/12 w-full absolute md:top-[52px] top-12 md:-left-[24px] left-0 right-0 
-  border  border-gray-200 md:rounded-xl rounded-none md:py-3 py-0 custom-box-shadow
-bg-white;
+  @apply md:w-11/12 
+  w-full 
+  absolute 
+  md:top-[52px] 
+  top-12 
+  md:-left-[24px] 
+  left-0 
+  right-0   
+  border
+  border-gray-200 
+  md:rounded-xl 
+  rounded-none 
+  md:py-3 
+  py-0 
+  custom-box-shadow
+  bg-white;
 }
 
 .results-li {
-  @apply flex items-center md:justify-start justify-between md:hover:bg-black md:hover:bg-opacity-10 cursor-default h-9 md:p-0 pl-2
-  md:border-none border-b  border-gray-100  last:border-b-0 ;
+  @apply flex 
+  items-center 
+  md:justify-start 
+  justify-between 
+  md:hover:bg-black 
+  md:hover:bg-opacity-10 
+  cursor-default 
+  h-9 
+  md:p-0 
+  pl-2
+  md:border-none 
+  border-b
+  border-gray-100
+  last:border-b-0;
 }
 
 .results-li-icon {
-  @apply w-10 flex justify-center;
+  @apply w-10 
+  flex 
+  justify-center;
 }
 
 .ghost {
-  @apply md:hidden block absolute left-0 right-0 -top-1 h-2 bg-white ;
+  @apply md:hidden 
+  block 
+  absolute 
+  left-0 
+  right-0 
+  -top-1 
+  h-2 
+  bg-white;
 }
 
 .arrow {
-  @apply bg-gray-100 h-full w-8 flex items-center justify-center;
+  @apply bg-gray-100 
+  h-full 
+  w-8 
+  flex 
+  items-center 
+  justify-center;
+
   @screen md {
     @apply hidden;
   }
