@@ -9,12 +9,14 @@ interface INightModeButton {
 
 const NightModeButton: React.FC<INightModeButton> = (props) => {
   const { setNightMode, nightMode } = props;
-  const ctx = useSearchBoxContext();
+  const handleClick = (): void => {
+    setNightMode(!nightMode);
+  };
 
   return (
     <button
       type='button'
-      onClick={() => setNightMode(!nightMode)}
+      onClick={handleClick}
       className='relative w-[40px] h-[40px] rounded-full bg-red-600 overflow-hidden'>
       <img
         src="./sun.svg"
