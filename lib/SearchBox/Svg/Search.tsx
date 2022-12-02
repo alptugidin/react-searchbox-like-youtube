@@ -5,7 +5,7 @@ const Search: React.FC<ISvg> = ({ size = 'mini' }) => {
   return (
     <svg
       viewBox="0 0 24 24"
-      className={size === 'normal' ? 'w-6 h-6' : 'w-5 h-5'}
+      className={`fill-black dark:fill-white transition-all ${size === 'normal' ? 'w-6 h-6' : 'w-5 h-5'}`}
       role='search'
       focusable="false" >
       <g>
