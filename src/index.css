@@ -7,6 +7,10 @@
     background: var(--darkBg);
   }
 
+  .dark-bg-secondary {
+    background: var(--darkBgSecondary);
+  }
+
   .light-bg {
     background: var(--lightBg);
   }
@@ -36,8 +40,10 @@
   rounded-none 
   items-center
   custom-box-shadow 
-  md:bg-white
+  md:light-bg
+  light-bg
   dark:md:dark-bg
+  dark:dark-bg-secondary
   transition-all;
 
   @screen md {
@@ -46,11 +52,10 @@
     flex 
     shadow-none 
     rounded-full 
-    h-auto 
-    border 
-    dark:dark-border
-    border-gray-300;
-
+    h-auto;
+    /* border  */
+    /* dark:dark-border */
+    /* border-gray-300; */
   }
 }
 
@@ -64,23 +69,39 @@
   basis-9/12 
   md:basis-full;
 }
+.input-comp-resp {
+  @apply basis-10/12 md:basis-full;
+}
 
 .input {
   @apply w-full 
-  pl-4 
+  pl-5
   md:pr-9 
   block 
+  md:border
+  border-gray-300
+  dark:dark-border
   rounded-r-none 
   rounded-l-full 
   bg-gray-100 
   dark:md:dark-bg
   md:light-bg
+  dark:bg-white
+  dark:bg-opacity-10
   text-black
   dark:text-white
-  outline-none; 
+  outline-none;
 }
 
-/* .input-extend {
+.input-focus {
+  @apply md:border-[#1F62B9]
+  dark:md:border-[#1F62B9]
+  md:shadow-inner
+}
+
+
+
+.input-extend {
   @apply absolute 
   left-0 
   right-0 
@@ -89,42 +110,47 @@
   h-12 
   py-2 
   z-20;
-} */
+}
 
 .input-search-button {
   @apply w-20 
   bg-gray-100
+  dark:bg-white
+  dark:bg-opacity-10
   flex 
   items-center 
   justify-center 
   rounded-r-full 
-  md:border 
-  md:border-l-gray-300
-  dark:md:border-l-white
-  dark:md:border-opacity-10
-  md:border-y-0 
-  md:border-r-0 
-  md:hover:bg-gray-300 
-  dark:md:bg-white
-  dark:md:bg-opacity-10
+  md:border
+  md:border-gray-300
+  md:border-l-0
+  dark:dark-border
+  md:hover:bg-gray-200 
+  dark:md:dark-bg-secondary
+  /* dark:md:bg-white */
+  /* dark:md:bg-opacity-10 */
+  /* dark:bg-white */
+  /* dark:bg-opacity-10 */
   transition-all;
 }
 
 .input-search-icon {
   @apply absolute 
-  -top-[1px] 
+  top-0
   md:bg-white
   dark:md:dark-bg
-  h-[42px] 
+  h-10 
   w-10 
   flex 
   items-center 
   justify-center 
-  -left-[24px] 
-  border 
-  md:border-l-gray-300 
-  md:border-y-gray-300
-  md:dark:dark-border
+  -left-[21px] 
+  border
+  /* md:border-l-gray-300  */
+  /* md:border-y-gray-300 */
+  md:border-l-[#1F62B9]
+  md:border-y-[#1F62B9]
+  md:shadow-inner
   border-r-0 
   rounded-l-full 
   z-30;
@@ -137,7 +163,7 @@
   absolute 
   md:right-[71px] 
   right-12 
-  md:mt-[3px] 
+  md:mt-[4px] 
   rounded-full
   dark:md:hover:bg-white
   dark:md:hover:bg-opacity-10
@@ -173,22 +199,27 @@
 }
 
 .results {
-  @apply md:w-11/12 
+  @apply md:w-[450px] 
   w-full 
   absolute 
-  md:top-[52px] 
-  top-12 
-  md:-left-[24px] 
+  md:top-11 
+  top-12
+  md:-left-[19px] 
   left-0 
   right-0   
   border
   border-gray-200 
+  dark:border-none
   md:rounded-xl 
   rounded-none 
   md:py-3 
   py-0 
-  custom-box-shadow
-  bg-white;
+  bg-white
+  dark:md:bg-white
+  dark:dark-bg-secondary
+  dark:text-white
+  dark:md:text-black
+  custom-box-shadow;
 }
 
 .results-li {
@@ -205,6 +236,8 @@
   md:border-none 
   border-b
   border-gray-100
+  dark:border-white
+  dark:border-opacity-10
   last:border-b-0;
 }
 
@@ -216,17 +249,21 @@
 
 .ghost {
   @apply md:hidden 
-  block 
+  h-2 
   absolute 
+  block 
   left-0 
   right-0 
   -top-1 
-  h-2 
+  dark:dark-bg-secondary
   bg-white;
 }
 
 .arrow {
   @apply bg-gray-100 
+  dark:md:bg-red-600
+  dark:bg-white
+  dark:bg-opacity-10
   h-full 
   w-8 
   flex 
