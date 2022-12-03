@@ -2,8 +2,11 @@ import NightModeButton from './components/NightModeButton';
 import React, { useEffect, useState } from 'react';
 import SearchBox from '../lib';
 import { ISearchResult } from '../lib/types';
+import { useFetch } from './hooks/useFetch';
 const App: React.FC = () => {
-  const [nightMode, setNightMode] = useState(true);
+  const [query, setQuery] = useState<string>();
+  const [nightMode, setNightMode] = useState(false);
+  const { asyncResults } = useFetch(query as string);
   const [results] = useState(
     [
       { id: 0, title: 'Javascript tutorials' },
@@ -21,6 +24,7 @@ const App: React.FC = () => {
   );
 
   const handleOnChange = (onChangeData: string): void => {
+    setQuery(onChangeData);
   };
 
   const handleOnClick = (onClickData: ISearchResult): void => {
