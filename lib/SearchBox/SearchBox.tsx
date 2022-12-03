@@ -6,6 +6,7 @@ import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
 import DummyInput from './DummyInput/DummyInput';
 import nightModeListener from '../utils/nightModeListener';
+import addWhite from '../utils/addWhite';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 const SearchBox: React.FC<ISearchBoxProps> = (
@@ -23,6 +24,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
   } = sx;
 
   const { isMobile } = useIsMobile();
+  const { lightDark } = addWhite(darkBg, 20);
   const [showSB, setShowSB] = useState(true);
   const [value, setValue] = useState('');
   const [tempVal, setTempVal] = useState('');
@@ -103,6 +105,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
         if (respBgRef.current?.contains(e.target as HTMLDivElement)) {
           setShowSB(false);
           setShowDummyInput(false);
+          respSbButton.current?.classList.remove('hidden');
         }
       }
     };
@@ -126,7 +129,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
 
   return (
     <SearchBoxContext.Provider value={ctxValue}>
-      <div style={{ '--lightBg': lightBg, '--darkBg': darkBg } as CSSProperties}>
+      <div style={{ '--lightBg': lightBg, '--darkBg': darkBg, '--darkBgSecondary': lightDark } as CSSProperties}>
         { isMobile &&
           <div className='flex'>
             {showDummyInput && <DummyInput/> }
