@@ -35,7 +35,6 @@ const Results = (): JSX.Element => {
     ctx.onClick(item);
     if (ctx.isMobile) {
       ctx.respBgRef.current?.classList.add('hidden');
-      // ctx.mainRef.current?.classList.add('!hidden');
       ctx.setShowSB(false);
       ctx.setShowDummyInput(true);
       ctx.respSbButton.current?.classList.add('hidden');
