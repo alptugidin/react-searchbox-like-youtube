@@ -66,6 +66,7 @@ const Input = (): JSX.Element => {
                   role='inputSearchIcon'
                   className='input-search-icon'>
                   <Search size='mini' />
+                  <div className='absolute w-[4px] h-[34px] -right-[1px] bottom-0 md:bg-white md:dark:dark-bg'></div>
                 </div>
         )
       }
@@ -77,7 +78,7 @@ const Input = (): JSX.Element => {
           onChange={handleOnChange}
           value={ctx.tempVal}
           placeholder='Search something'
-          className='input'
+          className={`input ${ctx.showLeftSearchSvg ? 'input-focus' : ''}`}
         />
         <button
           onClick={handleClear}
