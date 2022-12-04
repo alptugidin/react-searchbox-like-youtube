@@ -28,6 +28,7 @@ const App: React.FC = () => {
   };
 
   const handleOnClick = (onClickData: ISearchResult): void => {
+    console.log(onClickData);
   };
 
   const handleOnSearch = (onSearchData: any): void => {
@@ -48,10 +49,6 @@ const App: React.FC = () => {
             nightMode={nightMode}
             results={results}
             // results={asyncResults}
-            // sx={{
-            // lightBg: 'ffffff', // nightMode off
-            // darkBg: '#0F0F0F' // nightMode on
-            // }}
           />
         </div>
         <div className='md:w-3/12 w-2/12 flex justify-end'>
