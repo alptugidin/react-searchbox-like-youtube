@@ -33,7 +33,6 @@ export interface ISearchBoxContext extends Pick<ISearchBoxProps,
         dummyInput: React.RefObject<HTMLDivElement>
         respSbButton: React.RefObject<HTMLButtonElement>
     }
-    isMobile: boolean
     setShowSB: React.Dispatch<React.SetStateAction<boolean>>
     showSB: boolean
     filteredResults: ISearchResult[]
