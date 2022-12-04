@@ -54,7 +54,6 @@ const SearchBox: React.FC<ISearchBoxProps> = (
 
   const ctxValue = {
     refs,
-    isMobile,
     showSB,
     setShowSB,
     results,
@@ -116,8 +115,12 @@ const SearchBox: React.FC<ISearchBoxProps> = (
   nightModeListener(nightMode);
 
   return (
-    <SearchBoxContext.Provider value={ctxValue}>
-      <div style={{ '--lightBg': lightBg, '--darkBg': darkBg, '--darkBgSecondary': lightDark } as CSSProperties}>
+    <div style={{
+      '--lightBg': lightBg,
+      '--darkBg': darkBg,
+      '--darkBgSecondary': lightDark
+    } as CSSProperties}>
+      <SearchBoxContext.Provider value={ctxValue}>
         { isMobile &&
           <div className='flex'>
             {showDummyInput && <DummyInput/> }
@@ -140,8 +143,8 @@ const SearchBox: React.FC<ISearchBoxProps> = (
           <Results/>
         </div>
         }
-      </div>
-    </SearchBoxContext.Provider>
+      </SearchBoxContext.Provider>
+    </div>
   );
 };
 export const useSearchBoxContext = (): ISearchBoxContext => {

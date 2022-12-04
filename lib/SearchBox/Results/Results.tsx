@@ -1,4 +1,5 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
 import { ISearchResult } from '../../types';
 import { filterCondition } from '../../utils/filterCondition';
 import { useSearchBoxContext } from '../SearchBox';
@@ -7,6 +8,7 @@ import Arrow from '../Svg/Arrow';
 
 const Results: FC = () => {
   const ctx = useSearchBoxContext();
+  const { isMobile } = useIsMobile();
   const highlightedResult = (title: string): JSX.Element => {
     let span = <span role='results-text' className=''>{title}</span>;
     const splitted = title.split(new RegExp(`(${ctx.value})`, 'gi'));
@@ -25,7 +27,7 @@ const Results: FC = () => {
     ctx.setTempVal(item.title);
     ctx.setValue('');
     ctx.onClick(item);
-    if (ctx.isMobile) {
+    if (isMobile) {
       ctx.refs.respBg.current?.classList.add('hidden');
       ctx.setShowSB(false);
       ctx.setShowDummyInput(true);
@@ -61,7 +63,7 @@ const Results: FC = () => {
                 className='w-full text-left flex'
                 onClick={() => handleOnClick(item)}
               >
-                {!ctx.isMobile &&
+                {!isMobile &&
                 <div className='results-li-icon'>
                   <SearchLI size='mini'/>
                 </div>

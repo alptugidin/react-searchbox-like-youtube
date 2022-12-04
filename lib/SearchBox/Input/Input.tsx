@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
+import useIsMobile from '../../hooks/useIsMobile';
 import { filterCondition } from '../../utils/filterCondition';
 import { useSearchBoxContext } from '../SearchBox';
 import { Back, Clear, Search } from '../Svg';
 
 const Input: FC = () => {
   const ctx = useSearchBoxContext();
+  const { isMobile } = useIsMobile();
   const [showPopup, setShowPopup] = useState(false);
 
   const handleFocus = (): void => {
@@ -104,7 +106,7 @@ const Input: FC = () => {
 
   return (
     <div className='relative flex w-full'>
-      {ctx.isMobile
+      {isMobile
         ? (
           <button
             type='button'
@@ -153,7 +155,7 @@ const Input: FC = () => {
           className='input-search-button'>
           <Search size='normal'/>
 
-          {showPopup && !ctx.isMobile &&
+          {showPopup && !isMobile &&
             <div
               role='popup'
               className='search-popup'>
@@ -162,7 +164,7 @@ const Input: FC = () => {
           }
         </button>
       </div>
-      {ctx.isMobile &&
+      {isMobile &&
         <div ref={ctx.refs.respBg} className='resp-background' role='responsive-bg'/>
       }
 
