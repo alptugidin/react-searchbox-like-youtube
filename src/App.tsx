@@ -24,10 +24,14 @@ const App: React.FC = () => {
   );
 
   const handleOnChange = (onChangeData: string): void => {
-    setQuery(onChangeData);
+    // setQuery(onChangeData);
   };
 
   const handleOnClick = (onClickData: ISearchResult): void => {
+  };
+
+  const handleOnSearch = (onSearchData: any): void => {
+    console.log(onSearchData);
   };
 
   return (
@@ -40,11 +44,13 @@ const App: React.FC = () => {
           <SearchBox
             onChange={handleOnChange}
             onClick={handleOnClick}
-            results={results}
+            onSearch={handleOnSearch}
             nightMode={nightMode}
+            results={results}
+            // results={asyncResults}
             // sx={{
-            //   lightBg: '#FFFFFF', // nightMode off
-            //   darkBg: '#0F0F0F' // nightMode on
+            // lightBg: 'ffffff', // nightMode off
+            // darkBg: '#0F0F0F' // nightMode on
             // }}
           />
         </div>
