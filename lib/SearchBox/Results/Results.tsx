@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { ISearchResult } from '../../types';
+import { filterCondition } from '../../utils/filterCondition';
 import { useSearchBoxContext } from '../SearchBox';
 import { SearchLI } from '../Svg';
 import Arrow from '../Svg/Arrow';
@@ -37,6 +38,7 @@ const Results: FC = () => {
     ctx.setValue(title);
     ctx.setTempVal(title);
     ctx.refs.input.current?.focus();
+    ctx.setArr(ctx.results?.slice(0, 10).filter(item => filterCondition(item, title)));
   };
 
   useEffect(() => {
@@ -66,7 +68,11 @@ const Results: FC = () => {
                 }
                 {highlightedResult(item.title)}
               </button>
-              <button type='button' role='arrow-button' onClick={() => handleSelect(item.title)} className='arrow'>
+              <button
+                type='button'
+                role='arrow-button'
+                className='arrow'
+                onClick={() => handleSelect(item.title)}>
                 <Arrow/>
               </button>
             </li>
