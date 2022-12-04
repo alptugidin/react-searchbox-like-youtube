@@ -1,20 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { ISearchResult } from '../../types';
 import { useSearchBoxContext } from '../SearchBox';
 import { SearchLI } from '../Svg';
 import Arrow from '../Svg/Arrow';
 
-const Results = (): JSX.Element => {
+const Results: FC = () => {
   const ctx = useSearchBoxContext();
-  const [resultsLen, setResultsLen] = useState(0);
-
-  const filteringCondition = (title: string): string | undefined => {
-    if (ctx.value === '') return undefined;
-    if (ctx.value.length > 1 && title.toLowerCase().includes(ctx.value.toLowerCase())) {
-      return title;
-    }
-  };
-
   const highlightedResult = (title: string): JSX.Element => {
     let span = <span role='results-text' className=''>{title}</span>;
     const splitted = title.split(new RegExp(`(${ctx.value})`, 'gi'));
@@ -34,34 +25,36 @@ const Results = (): JSX.Element => {
     ctx.setValue('');
     ctx.onClick(item);
     if (ctx.isMobile) {
-      ctx.respBgRef.current?.classList.add('hidden');
+      ctx.refs.respBg.current?.classList.add('hidden');
       ctx.setShowSB(false);
       ctx.setShowDummyInput(true);
-      ctx.respSbButton.current?.classList.add('hidden');
-      ctx.dummyInputRef.current?.classList.remove('hidden');
+      ctx.refs.respSbButton.current?.classList.add('hidden');
+      ctx.refs.dummyInput.current?.classList.remove('hidden');
     }
   };
 
   const handleSelect = (title: string): void => {
     ctx.setValue(title);
     ctx.setTempVal(title);
-    ctx.inputRef.current?.focus();
+    ctx.refs.input.current?.focus();
   };
 
   useEffect(() => {
-    setResultsLen(ctx.results.filter((item) => filteringCondition(item.title)).length);
+    if (ctx.value.length < 2) {
+      ctx.setArr(undefined);
+    }
   }, [ctx.value]);
 
   return (
     <>
-      {resultsLen > 0 &&
-      <div ref={ctx.resultRef} className='results'>
+      {ctx.arr !== undefined && ctx.arr.length > 0 && ctx.value.length > 1 &&
+      <div ref={ctx.refs.result} className='results'>
         <div className='ghost' />
         <ul role='search-results' className='results-ul'>
-          { ctx.results.filter(item => filteringCondition(item.title)).map(item =>
+          { ctx.arr.map((item, index) =>
             <li
               key={item.id}
-              className='results-li'>
+              className={`results-li ${ctx.active === index ? 'bg-[#00000010]' : ''}`}>
               <button
                 className='w-full text-left flex'
                 onClick={() => handleOnClick(item)}
