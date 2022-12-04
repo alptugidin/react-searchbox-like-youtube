@@ -7,12 +7,14 @@ import useIsMobile from '../hooks/useIsMobile';
 import DummyInput from './DummyInput/DummyInput';
 import nightModeListener from '../utils/nightModeListener';
 import addWhite from '../utils/addWhite';
+import { filterCondition } from '../utils/filterCondition';
 
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 const SearchBox: React.FC<ISearchBoxProps> = (
   {
     onChange,
     onClick,
+    onSearch,
     results,
     nightMode = false,
     sx = {}
@@ -25,50 +27,34 @@ const SearchBox: React.FC<ISearchBoxProps> = (
 
   const { isMobile } = useIsMobile();
   const { lightDark } = addWhite(darkBg, 20);
+
   const [showSB, setShowSB] = useState(true);
   const [value, setValue] = useState('');
   const [tempVal, setTempVal] = useState('');
   const [filteredResults, setFilteredResults] = useState<ISearchResult[]>([]);
-
-  const mainRef = useRef<HTMLDivElement>(null);
-  const topRef = useRef<HTMLDivElement>(null);
-  const searchButtonRef = useRef<HTMLButtonElement>(null);
-  const backButtonRef = useRef<HTMLButtonElement>(null);
-  const rightDivRef = useRef<HTMLDivElement>(null);
-  const middleDivRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const resultRef = useRef<HTMLDivElement>(null);
-  const boxRef = useRef<HTMLDivElement>(null);
-  const leftSvgRef = useRef<HTMLDivElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  /** @branchDefinitions */
+  const [arr, setArr] = useState<ISearchResult[]>();
+  const [active, setActive] = useState(-1);
   const [showLeftSearchSvg, setShowLeftSearchSvg] = useState(false);
   const [showDummyInput, setShowDummyInput] = useState(false);
-  const respBgRef = useRef<HTMLDivElement>(null);
-  const inputSearchIconRef = useRef<HTMLDivElement>(null);
-  const clearButtonRef = useRef<HTMLButtonElement>(null);
-  const dummyInputRef = useRef<HTMLDivElement>(null);
-  const respSbButton = useRef<HTMLButtonElement>(null);
-  /** @branchDefinitions */
+
+  const refs = {
+    main: useRef<HTMLDivElement>(null),
+    input: useRef<HTMLInputElement>(null),
+    result: useRef<HTMLDivElement>(null),
+    respBg: useRef<HTMLDivElement>(null),
+    inputSearchIcon: useRef<HTMLDivElement>(null),
+    clearButton: useRef<HTMLButtonElement>(null),
+    dummyInput: useRef<HTMLDivElement>(null),
+    respSbButton: useRef<HTMLButtonElement>(null)
+  };
 
   const handleClick = (): void => {
     setShowSB(true);
   };
 
   const ctxValue = {
+    refs,
     isMobile,
-    mainRef,
-    topRef,
-    rightDivRef,
-    middleDivRef,
-    searchButtonRef,
-    backButtonRef,
-    inputRef,
-    resultRef,
-    boxRef,
-    leftSvgRef,
-    modalRef,
     showSB,
     setShowSB,
     results,
@@ -80,32 +66,30 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     setValue,
     tempVal,
     setTempVal,
-    /** @branchRef */
-    inputSearchIconRef,
-    clearButtonRef,
-    respBgRef,
-    dummyInputRef,
-    respSbButton,
     showLeftSearchSvg,
     setShowLeftSearchSvg,
     showDummyInput,
     setShowDummyInput,
     darkBg,
-    lightBg
-    /** @branchRef */
+    lightBg,
+    arr,
+    setArr,
+    active,
+    setActive,
+    onSearch
   };
 
   useEffect(() => {
     const listener = (e: MouseEvent): void => {
-      if (!mainRef.current?.contains(e.target as HTMLDivElement)) {
+      if (!refs.main.current?.contains(e.target as HTMLDivElement)) {
         setShowLeftSearchSvg(false);
         setValue('');
       }
       if (isMobile) {
-        if (respBgRef.current?.contains(e.target as HTMLDivElement)) {
+        if (refs.respBg.current?.contains(e.target as HTMLDivElement)) {
           setShowSB(false);
           setShowDummyInput(false);
-          respSbButton.current?.classList.remove('hidden');
+          refs.respSbButton.current?.classList.remove('hidden');
         }
       }
     };
@@ -122,8 +106,12 @@ const SearchBox: React.FC<ISearchBoxProps> = (
   }, [isMobile]);
 
   useEffect(() => {
-    if (isMobile && showSB) inputRef.current?.focus();
+    if (isMobile && showSB) refs.input.current?.focus();
   }, [showSB]);
+
+  useEffect(() => {
+    setArr(results?.slice(0, 10).filter(async item => filterCondition(item, value)));
+  }, [results]);
 
   nightModeListener(nightMode);
 
@@ -134,7 +122,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
           <div className='flex'>
             {showDummyInput && <DummyInput/> }
             <button
-              ref={respSbButton}
+              ref={refs.respSbButton}
               role='responsive-search-button'
               type='button'
               onClick={handleClick}
@@ -145,7 +133,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
         }
         {showSB &&
         <div
-          ref={mainRef}
+          ref={refs.main}
           id='sbly'
           className='searchbox'>
           <Input />
