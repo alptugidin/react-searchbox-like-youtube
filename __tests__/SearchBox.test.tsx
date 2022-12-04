@@ -30,6 +30,7 @@ it('should render on the page', () => {
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const input = screen.getByPlaceholderText('Search something');
   expect(input).toBeInTheDocument();
@@ -42,6 +43,7 @@ it('should render the hidden search svg when input has focused', async () => {
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const input = screen.getByPlaceholderText('Search something');
   expect(queryByRole(container, 'inputSearchIcon')).toEqual(null);
@@ -56,6 +58,7 @@ it('should be visible when the search button is clicked in responsive mode', asy
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   expect(queryByPlaceholderText(container, 'Search something')).toEqual(null);
@@ -70,6 +73,7 @@ it('should be removed from the document when back button is clicked in responsiv
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   await userEvent.click(responsiveSearchButton);
@@ -86,6 +90,7 @@ it('should be removed from the document when clicked in outside the search box',
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   await userEvent.click(responsiveSearchButton);
@@ -102,6 +107,7 @@ it('should render the hidden search popup when search button is hovered', async 
       results={[]}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const searchButton = screen.getByRole('SearchButton');
   expect(queryByRole(container, 'popup')).toEqual(null);
@@ -115,6 +121,7 @@ it('should matched that the search term and the results', async () => {
       results={results}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, randomTerm);
@@ -130,6 +137,7 @@ it('should remove li-search-icon from document in responsive mode', async () => 
       results={results}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   await userEvent.click(responsiveSearchButton);
@@ -145,6 +153,7 @@ it('should update value and results when the arrow button is clicked in responsi
       results={results}
       onChange={mockFn}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   await userEvent.click(responsiveSearchButton);
@@ -169,6 +178,7 @@ test('onChange function ', async () => {
       results={results}
       onChange={handleOnChange}
       onClick={mockFn}
+      onSearch={mockFn}
     />);
 
   const searchBox = screen.getByPlaceholderText('Search something');
@@ -187,6 +197,7 @@ test('onClick function', async () => {
       results={results}
       onChange={mockFn}
       onClick={handleOnClick}
+      onSearch={mockFn}
     />);
 
   const searchBox = screen.getByPlaceholderText('Search something');
