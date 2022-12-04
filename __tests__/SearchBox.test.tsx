@@ -167,6 +167,44 @@ it('should update value and results when the arrow button is clicked in responsi
   expect(screen.getAllByRole('arrow-button').length).toEqual(1);
 });
 
+it('should render the dummy input after selected any of the results in responsive mode', async () => {
+  window.innerWidth = 700;
+  const { container } = render(
+    <SearchBox
+      results={results}
+      onChange={mockFn}
+      onClick={mockFn}
+      onSearch={mockFn}
+    />);
+  const responsiveSearchButton = screen.getByRole('responsive-search-button');
+  await userEvent.click(responsiveSearchButton);
+  const responsiveSeachBox = screen.getByPlaceholderText('Search something');
+  await userEvent.type(responsiveSeachBox, 'javascript');
+  const firstResult = screen.getAllByRole('results-text');
+  expect(queryByRole(container, 'dummy-input')).not.toBeInTheDocument();
+  await userEvent.click(firstResult[0]);
+  expect(queryByRole(container, 'dummy-input')).toBeInTheDocument();
+});
+
+it('should set dummy input value with selected data in responsive mode', async () => {
+  window.innerWidth = 700;
+  const { container } = render(
+    <SearchBox
+      results={results}
+      onChange={mockFn}
+      onClick={mockFn}
+      onSearch={mockFn}
+    />);
+  const responsiveSearchButton = screen.getByRole('responsive-search-button');
+  await userEvent.click(responsiveSearchButton);
+  const responsiveSeachBox = screen.getByPlaceholderText('Search something');
+  await userEvent.type(responsiveSeachBox, randomTerm);
+  const firstResult = screen.getAllByRole('results-text');
+  await userEvent.click(firstResult[0]);
+  const randomTermRegexp = new RegExp(`(${randomTerm})`, 'gi');
+  expect(queryByRole(container, 'dummy-input')).toHaveTextContent(randomTermRegexp);
+});
+
 test('onChange function ', async () => {
   window.innerWidth = 1920;
   let catchOnChangeData;
