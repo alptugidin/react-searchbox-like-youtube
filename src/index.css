@@ -227,8 +227,7 @@
   items-center 
   md:justify-start 
   justify-between 
-  md:hover:bg-black 
-  md:hover:bg-opacity-10 
+  md:hover:bg-[#00000010]
   cursor-default 
   h-9 
   md:p-0 
