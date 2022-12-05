@@ -100,7 +100,7 @@ it('should be removed from the document when clicked in outside the search box',
   expect(responsiveSeachBox).not.toBeInTheDocument();
 });
 
-it('should render the hidden search popup when search button is hovered', async () => {
+it('should render the hidden search popup when search button is hovered and vice versa', async () => {
   window.innerWidth = 1920;
   const { container } = render(
     <SearchBox
@@ -109,10 +109,12 @@ it('should render the hidden search popup when search button is hovered', async 
       onClick={mockFn}
       onSearch={mockFn}
     />);
-  const searchButton = screen.getByRole('SearchButton');
+  const searchButton = screen.getByRole('search-button');
   expect(queryByRole(container, 'popup')).toEqual(null);
   await userEvent.hover(searchButton);
   expect(queryByRole(container, 'popup')).not.toEqual(null);
+  await userEvent.unhover(searchButton);
+  expect(queryByRole(container, 'popup')).toEqual(null);
 });
 
 it('should matched that the search term and the results', async () => {
@@ -207,9 +209,9 @@ it('should set dummy input value with selected data in responsive mode', async (
 
 test('onChange function ', async () => {
   window.innerWidth = 1920;
-  let catchOnChangeData;
+  let captureOnChangeData;
   const handleOnChange = (onChangeData: string): void => {
-    catchOnChangeData = onChangeData;
+    captureOnChangeData = onChangeData;
   };
   render(
     <SearchBox
@@ -221,14 +223,14 @@ test('onChange function ', async () => {
 
   const searchBox = screen.getByPlaceholderText('Search something');
   await userEvent.type(searchBox, randomTerm);
-  expect(catchOnChangeData).toEqual(randomTerm);
+  expect(captureOnChangeData).toEqual(randomTerm);
 });
 
 test('onClick function', async () => {
   window.innerWidth = 1920;
-  let catchOnClickData;
+  let captureOnClickData;
   const handleOnClick = (onClickData: ISearchResult): void => {
-    catchOnClickData = onClickData;
+    captureOnClickData = onClickData;
   };
   render(
     <SearchBox
@@ -242,6 +244,6 @@ test('onClick function', async () => {
   await userEvent.type(searchBox, 'kotlin');
   const firstResult = screen.getByRole('results-text');
   await userEvent.click(firstResult);
-  expect((catchOnClickData as unknown as ISearchResult).id).toEqual(3);
-  expect((catchOnClickData as unknown as ISearchResult).title).toEqual('Kotlin tutorials');
+  expect((captureOnClickData as unknown as ISearchResult).id).toEqual(3);
+  expect((captureOnClickData as unknown as ISearchResult).title).toEqual('Kotlin tutorials');
 });
