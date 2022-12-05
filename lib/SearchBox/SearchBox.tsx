@@ -2,13 +2,12 @@ import React, { createContext, CSSProperties, useContext, useEffect, useRef, use
 import { Input } from './Input';
 import { Results } from './Results';
 import { Search } from './Svg';
-import { ISearchBoxContext, ISearchBoxProps, ISearchResult } from '../types';
+import { ISearchBoxContext, ISearchBoxProps, ISearchBoxProvider, ISearchResult } from '../types';
 import useIsMobile from '../hooks/useIsMobile';
 import DummyInput from './DummyInput/DummyInput';
 import nightModeListener from '../utils/nightModeListener';
 import addWhite from '../utils/addWhite';
 import { filterCondition } from '../utils/filterCondition';
-
 const SearchBoxContext = createContext<ISearchBoxContext>({} as ISearchBoxContext);
 const SearchBox: React.FC<ISearchBoxProps> = (
   {
