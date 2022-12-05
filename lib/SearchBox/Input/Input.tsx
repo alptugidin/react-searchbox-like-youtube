@@ -140,6 +140,7 @@ const Input: FC = () => {
         />
         <button
           onClick={handleClear}
+          role='clear'
           ref={ctx.refs.clearButton}
           className={`input-clear-button ${ctx.tempVal.length > 0 ? '' : 'hidden'}`}>
           <div className='input-clear-button-svg'>
@@ -148,7 +149,7 @@ const Input: FC = () => {
         </button>
 
         <button
-          role='SearchButton'
+          role='search-button'
           onClick={handleSearch}
           onMouseEnter={handleSearchHover}
           onMouseLeave={handleSearchHover}
