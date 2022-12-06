@@ -28,11 +28,9 @@ const Results: FC = () => {
     ctx.setValue('');
     ctx.onClick(item);
     if (isMobile) {
-      ctx.refs.respBg.current?.classList.add('hidden');
       ctx.setShowSB(false);
       ctx.setShowDummyInput(true);
       ctx.refs.respSbButton.current?.classList.add('hidden');
-      ctx.refs.dummyInput.current?.classList.remove('hidden');
     }
   };
 

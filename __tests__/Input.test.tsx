@@ -1,6 +1,6 @@
 import React, { createContext, useDeferredValue } from 'react';
 import jest from 'jest-mock';
-import { getByRole, queryByPlaceholderText, queryByRole, render, screen } from '@testing-library/react';
+import { queryByRole, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchBox from '../lib';
 
@@ -63,7 +63,7 @@ test('handleKeyDown', async () => {
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, 'tut');
   // case ArrowDown (twice)
-  await userEvent.keyboard('{arrowdown}{arrowdown}');
+  await userEvent.keyboard('{arrowdown>2}');
   const ul = screen.getByRole('search-results');
   expect(ul.childNodes[1]).toHaveClass('bg-[#00000010]');
   // case ArrowUp (once)
@@ -72,5 +72,64 @@ test('handleKeyDown', async () => {
   expect(ul.childNodes[0]).toHaveClass('bg-[#00000010]');
   // case BackSpace
   await userEvent.type(input, '{backspace>30}');
+  expect(input).toHaveValue('');
+  // Enter
+  await userEvent.type(input, 'javascript');
+  await userEvent.keyboard('{arrowdown>2}');
+  const textContent = ul.childNodes[1].textContent;
+  await userEvent.keyboard('{enter}');
+  expect(queryByRole(container, 'search-results')).toEqual(null);
+  expect(input).toHaveValue(textContent);
+  // Enter test with random search term like 'foo'
+  await userEvent.click(screen.getByRole('clear'));
+  await userEvent.type(input, 'foo');
+  await userEvent.keyboard('{enter}');
+  expect(input).toHaveValue('foo');
+});
+
+it('should return to first li element when press arrowDown in the last li element', async () => {
+  render(
+    <SearchBox
+      results={results}
+      onChange={mockFn}
+      onClick={mockFn}
+      onSearch={mockFn}
+    />);
+  const input = screen.getByPlaceholderText('Search something');
+  await userEvent.type(input, 'javascript');
+  const ul = screen.getByRole('search-results');
+  await userEvent.keyboard('{arrowdown>2}');
+  expect(ul.childNodes[1]).toHaveClass('bg-[#00000010]');
+  await userEvent.keyboard('{arrowdown}');
+  expect(ul.childNodes[1]).not.toHaveClass('bg-[#00000010]');
+  expect(ul.childNodes[0]).toHaveClass('bg-[#00000010]');
+});
+
+it('should return to last li element when press arrowUp in the first li element', async () => {
+  render(
+    <SearchBox
+      results={results}
+      onChange={mockFn}
+      onClick={mockFn}
+      onSearch={mockFn}
+    />);
+  const input = screen.getByPlaceholderText('Search something');
+  await userEvent.type(input, 'javascript');
+  const ul = screen.getByRole('search-results');
+  await userEvent.keyboard('{arrowup}');
+  expect(ul.childNodes[0]).not.toHaveClass('bg-[#00000010]');
+  expect(ul.childNodes[1]).toHaveClass('bg-[#00000010]');
+});
+
+it('should not update input value if first value is space', async () => {
+  render(
+    <SearchBox
+      results={results}
+      onChange={mockFn}
+      onClick={mockFn}
+      onSearch={mockFn}
+    />);
+  const input = screen.getByPlaceholderText('Search something');
+  await userEvent.type(input, ' ');
   expect(input).toHaveValue('');
 });

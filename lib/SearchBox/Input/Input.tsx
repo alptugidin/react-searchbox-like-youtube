@@ -28,10 +28,21 @@ const Input: FC = () => {
   };
 
   const handleSearch = (): void => {
-    ctx.setTempVal(ctx.value);
-    ctx.setValue('');
-    ctx.setArr(undefined);
-    ctx.setShowLeftSearchSvg(false);
+    if (!isMobile) {
+      ctx.setTempVal(ctx.value);
+      ctx.setValue('');
+      ctx.setArr(undefined);
+      ctx.setShowLeftSearchSvg(false);
+    } else {
+      if (ctx.value !== '') {
+        ctx.setTempVal(ctx.value);
+        ctx.setValue(ctx.value);
+        ctx.setArr(undefined);
+        ctx.setShowSB(false);
+        ctx.setShowDummyInput(true);
+        ctx.refs.respSbButton.current?.classList.add('hidden');
+      }
+    }
   };
 
   const handleBack = (): void => {

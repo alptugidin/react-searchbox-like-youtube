@@ -137,6 +137,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
         <div
           ref={refs.main}
           id='sbly'
+          role='searchbox'
           className='searchbox'>
           <Input />
           <Results/>
