@@ -76,6 +76,7 @@
 .input {
   @apply w-full 
   pl-5
+  transition-all
   md:pr-9 
   block 
   md:border
@@ -95,11 +96,10 @@
 
 .input-focus {
   @apply md:border-[#1F62B9]
+  transform-none
   dark:md:border-[#1F62B9]
-  md:shadow-inner
+  md:shadow-inner;
 }
-
-
 
 .input-extend {
   @apply absolute 
