@@ -1,8 +1,31 @@
 {
   "name": "react-searchbox-like-youtube",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Alptuğ İdin",
   "type": "module",
+  "description": "Customizable Searchbox with autocomplete and highlighted results for React applications.",
+  "keywords": [
+    "react",
+    "searchbox",
+    "autocomplete",
+    "youtube searchbox",
+    "youtube"
+  ],
+  "main": "./index.js",
+  "module": "./index.esm.js",
+  "types": "./index.d.ts",
+  "files": [
+    "./index.css",
+    "./index.d.ts",
+    "./index.esm.js",
+    "./index.js",
+    "./package.json"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
