@@ -115,6 +115,15 @@ const Input: FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (ctx.showLeftSearchSvg) {
+      ctx.refs.input.current?.classList.add('!transition-none');
+      setTimeout(() => {
+        ctx.refs.input.current?.classList.remove('!transition-none');
+      }, 150);
+    }
+  }, [ctx.showLeftSearchSvg]);
+
   return (
     <div className='relative flex w-full'>
       {isMobile
