@@ -155,7 +155,7 @@ const Input: FC = () => {
           onChange={handleOnChange}
           onKeyDown={handleKeyDown}
           value={ctx.tempVal}
-          placeholder='Search something'
+          placeholder={ctx.placeholder ?? 'Search something'}
           className={`input ${ctx.showLeftSearchSvg ? 'input-focus' : ''}`}
         />
         <button

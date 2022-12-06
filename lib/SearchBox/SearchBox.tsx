@@ -16,6 +16,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     onSearch,
     results,
     nightMode = false,
+    placeholder,
     sx = {}
   }
 ) => {
@@ -56,6 +57,7 @@ const SearchBox: React.FC<ISearchBoxProps> = (
     showSB,
     setShowSB,
     results,
+    placeholder,
     onChange,
     onClick,
     filteredResults,
