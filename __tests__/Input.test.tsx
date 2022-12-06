@@ -59,6 +59,7 @@ test('handleKeyDown', async () => {
       onChange={mockFn}
       onClick={mockFn}
       onSearch={mockFn}
+      placeholder='Search something'
     />);
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, 'tut');
@@ -94,6 +95,7 @@ it('should return to first li element when press arrowDown in the last li elemen
       onChange={mockFn}
       onClick={mockFn}
       onSearch={mockFn}
+      placeholder='Search something'
     />);
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, 'javascript');
@@ -112,6 +114,7 @@ it('should return to last li element when press arrowUp in the first li element'
       onChange={mockFn}
       onClick={mockFn}
       onSearch={mockFn}
+      placeholder='Search something'
     />);
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, 'javascript');
@@ -128,6 +131,7 @@ it('should not update input value if first value is space', async () => {
       onChange={mockFn}
       onClick={mockFn}
       onSearch={mockFn}
+      placeholder='Search something'
     />);
   const input = screen.getByPlaceholderText('Search something');
   await userEvent.type(input, ' ');

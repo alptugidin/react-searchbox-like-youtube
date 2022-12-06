@@ -14,6 +14,7 @@ it('should render the focused searchbox when clicked in responsive mode', async 
       onChange={mockFn}
       onClick={mockFn}
       onSearch={mockFn}
+      placeholder='Search something'
     />);
   const responsiveSearchButton = screen.getByRole('responsive-search-button');
   await userEvent.click(responsiveSearchButton);
