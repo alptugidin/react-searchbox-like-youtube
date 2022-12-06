@@ -1,6 +1,7 @@
 import NightModeButton from './components/NightModeButton';
 import React, { useEffect, useState } from 'react';
-import SearchBox from '../lib';
+// import SearchBox from '../lib';
+import SearchBox from 'react-searchbox-like-youtube';
 import { ISearchResult } from '../lib/types';
 import { useFetch } from './hooks/useFetch';
 const App: React.FC = () => {
