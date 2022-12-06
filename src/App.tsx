@@ -24,7 +24,7 @@ const App: React.FC = () => {
   );
 
   const handleOnChange = (onChangeData: string): void => {
-    // setQuery(onChangeData);
+    setQuery(onChangeData);
   };
 
   const handleOnClick = (onClickData: ISearchResult): void => {
@@ -47,8 +47,8 @@ const App: React.FC = () => {
             onClick={handleOnClick}
             onSearch={handleOnSearch}
             nightMode={nightMode}
-            results={results}
-            // results={asyncResults}
+            // results={results}
+            results={asyncResults}
           />
         </div>
         <div className='md:w-3/12 w-2/12 flex justify-end'>
