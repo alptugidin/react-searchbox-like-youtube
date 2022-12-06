@@ -7,12 +7,14 @@ export interface ISvg {
 export interface ISearchResult {
     id: number
     title: string
+    href?: string
 }
 export interface ISearchBoxProps {
-    results: ISearchResult[] | undefined
     onChange: (onChangeData: string) => void
     onClick: (onClickData: ISearchResult) => void
     onSearch: (onSearchData: string | ISearchResult) => void
+    results: ISearchResult[] | undefined
+    placeholder?: string
     nightMode?: boolean
     sx?: {
         lightBg?: string
@@ -21,7 +23,7 @@ export interface ISearchBoxProps {
 }
 
 export interface ISearchBoxContext extends Pick<ISearchBoxProps,
-    'results' | 'onChange' | 'onClick' | 'sx' | 'nightMode' | 'onSearch'
+    'results' | 'onChange' | 'onClick' | 'sx' | 'nightMode' | 'onSearch' | 'placeholder'
     > {
     refs: {
         main: React.RefObject<HTMLDivElement>
