@@ -17,7 +17,8 @@ export const useFetch = (param: string): IFetchMovies => {
           response.results.forEach((data: any) => {
             const el: ISearchResult = {
               id: data.id,
-              title: data.title
+              title: data.title,
+              href: '/'
             };
             arr.push(el);
           });
