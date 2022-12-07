@@ -1,9 +1,8 @@
 import NightModeButton from './components/NightModeButton';
 import React, { useEffect, useState } from 'react';
-// import SearchBox from '../lib';
-import SearchBox from 'react-searchbox-like-youtube';
-import { ISearchResult } from '../lib/types';
 import { useFetch } from './hooks/useFetch';
+import { ISearchResult } from '../lib/types';
+import SearchBox from '../lib';
 const App: React.FC = () => {
   const [query, setQuery] = useState<string>();
   const [nightMode, setNightMode] = useState(false);
