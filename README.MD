@@ -6,7 +6,7 @@
 Fully customizable and responsive, ready-to-use SearchBox component like Youtube.
 <br>
 <br>
-<a target="_blank" href="https://alptugidin.github.io/react-searchbox-like-google/">Demo</a>
+<a target="_blank" href="https://alptugidin.github.io/react-searchbox-like-youtube/">Demo</a>
 <br>
 <br>
 </p>
