@@ -9,9 +9,10 @@ export interface ISearchResult {
     title: string
     href?: string
 }
+export interface IOnClickData extends ISearchResult {}
 export interface ISearchBoxProps {
     onChange: (onChangeData: string) => void
-    onClick: (onClickData: ISearchResult) => void
+    onClick: (onClickData: IOnClickData) => void
     onSearch: (onSearchData: string | ISearchResult) => void
     results: ISearchResult[] | undefined
     placeholder?: string

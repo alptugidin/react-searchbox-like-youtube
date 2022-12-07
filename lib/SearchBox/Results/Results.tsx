@@ -1,6 +1,6 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile';
-import { ISearchResult } from '../../types';
+import { IOnClickData } from '../../types';
 import { filterCondition } from '../../utils/filterCondition';
 import { useSearchBoxContext } from '../SearchBox';
 import { SearchLI } from '../Svg';
@@ -23,7 +23,7 @@ const Results: FC = () => {
     return span;
   };
 
-  const handleOnClick = (item: ISearchResult): void => {
+  const handleOnClick = (item: IOnClickData): void => {
     ctx.setTempVal(item.title);
     ctx.setValue('');
     ctx.onClick(item);
