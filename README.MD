@@ -13,7 +13,8 @@ Fully customizable and responsive, ready-to-use SearchBox component like Youtube
 <p align="center">
 <a href="https://badge.fury.io/js/react-searchbox-like-youtube"> 
 <img src="https://badge.fury.io/js/react-searchbox-like-youtube.svg" />
-<img alt="npm" src="https://img.shields.io/npm/dm/react-searchbox-like-youtube">
+<!-- <img alt="npm" src="https://img.shields.io/npm/dm/react-searchbox-like-youtube"> -->
+<img alt"npm" src="https://img.shields.io/npm/dt/react-searchbox-like-youtube.svg">
 </a>
 </p>
 <p align="center">
